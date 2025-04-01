@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabriela&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tangled-themed custom styles */
+:root {
+  font-family: 'Poppins', system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light;
+  color: #f8f8f8;
+  background-color: #1E102F;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  /* Prevent horizontal overflow */
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  background: linear-gradient(to bottom, #1E102F, #271542, #321B4B);
+  background-attachment: fixed;
+}
+
+/* Fix for mobile container width */
+.container {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Ensure all elements respect container bounds */
+img, video, svg, picture, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* For smooth transitions between sections */
+section {
+  @apply transition-all duration-500 ease-in-out;
+}
+
+/* Custom components and styles */
+@layer components {
+  /* Hide scrollbars but allow scrolling for carousel */
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Enhanced button styles */
+  .btn-tangled-primary {
+    @apply relative overflow-hidden bg-tangled-purple text-white px-6 py-3 rounded-full font-medium transition-all duration-300 shadow-lg;
+    box-shadow: 0 0 15px rgba(78, 42, 132, 0.5);
+  }
+  
+  .btn-tangled-primary:hover {
+    @apply transform -translate-y-1;
+    box-shadow: 0 0 25px rgba(78, 42, 132, 0.8);
+  }
+  
+  .btn-tangled-primary:before {
+    @apply content-[''] absolute top-0 left-0 w-full h-full bg-white opacity-20;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 0.5s ease;
+  }
+  
+  .btn-tangled-primary:hover:before {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  .btn-tangled-secondary {
+    @apply relative overflow-hidden bg-tangled-gold text-white px-6 py-3 rounded-full font-medium transition-all duration-300 shadow-lg;
+    box-shadow: 0 0 15px rgba(253, 187, 45, 0.5);
+  }
+  
+  .btn-tangled-secondary:hover {
+    @apply transform -translate-y-1;
+    box-shadow: 0 0 25px rgba(253, 187, 45, 0.8);
+  }
+  
+  .btn-tangled-secondary:before {
+    @apply content-[''] absolute top-0 left-0 w-full h-full bg-white opacity-20;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 0.5s ease;
+  }
+  
+  .btn-tangled-secondary:hover:before {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  /* Section and title styles */
+  .section-title {
+    @apply font-tangled text-3xl md:text-4xl lg:text-5xl text-tangled-purple mb-4;
+  }
+  
+  .section-title-light {
+    @apply font-tangled text-3xl md:text-4xl lg:text-5xl text-white mb-4;
+  }
+  
+  .section-divider {
+    @apply w-24 h-1 bg-tangled-gold mx-auto my-4;
+  }
+  
+  /* Lantern glow effect */
+  .lantern-glow {
+    @apply relative;
+  }
+  
+  .lantern-glow-effect {
+    @apply absolute top-0 left-0 w-full h-full bg-tangled-gold/20 blur-xl rounded-full scale-[1.2] -z-10;
+  }
+  
+  /* Card styles */
+  .card-tangled {
+    @apply bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border border-tangled-lavender/20;
+  }
+  
+  .card-tangled-dark {
+    @apply bg-black/30 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-tangled-gold/20;
+  }
+  
+  /* Nighttime theme elements */
+  .starry-bg {
+    @apply relative overflow-hidden;
+  }
+  
+  .starry-bg:before {
+    @apply content-[''] absolute inset-0 bg-[#1E102F] opacity-90;
+  }
+  
+  .night-section {
+    @apply bg-gradient-to-b from-[#1E102F] via-[#271542] to-[#321B4B] text-white relative overflow-hidden;
+  }
+  
+  .water-reflection {
+    @apply relative overflow-hidden;
+  }
+  
+  .water-reflection:after {
+    @apply content-[''] absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#3F2569]/60 to-transparent;
+  }
+  
+  /* Shimmering text effect */
+  .shimmer-text {
+    @apply relative inline-block;
+    background: linear-gradient(to right, #fdbb2d 20%, #fff 40%, #fdbb2d 60%, #fdbb2d 80%);
+    background-size: 200% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: shimmer 2s linear infinite;
+  }
+  
+  @keyframes shimmer {
+    to {
+      background-position: 200% center;
+    }
+  }
+}
+
+/* Scrollbar styles for webkit browsers */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(30, 16, 47, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(78, 42, 132, 0.7);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(253, 187, 45, 0.7);
+}
+
+@layer utilities {
+  /* Text shadow utilities for better contrast */
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .text-shadow-md {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .text-shadow-none {
+    text-shadow: none;
+  }
+}
