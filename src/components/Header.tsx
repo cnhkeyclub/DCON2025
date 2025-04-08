@@ -1,35 +1,38 @@
-import { FaHome, FaInfoCircle, FaCalendarAlt, FaEnvelope } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaHome, FaCalendarAlt, FaMapMarkedAlt, FaUsers } from 'react-icons/fa';
 
 function Header() {
   return (
     <header className="bg-slate-900 py-4 px-6 shadow-md">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-        <h1 className="text-2xl font-bold text-white mb-4 md:mb-0">CNHD Conference 2025</h1>
+        <Link to="/" className="text-2xl font-bold text-white mb-4 md:mb-0 hover:text-amber-300 transition-colors">
+          CNHD Conference 2025
+        </Link>
         <nav>
-          <ul className="flex space-x-6">
+          <ul className="flex flex-wrap space-x-4 md:space-x-6">
             <li>
-              <a href="#" className="text-white hover:text-indigo-300 transition-colors flex items-center gap-1">
+              <Link to="/" className="text-white hover:text-amber-300 transition-colors flex items-center gap-1">
                 <FaHome className="inline" />
                 <span>Home</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-white hover:text-indigo-300 transition-colors flex items-center gap-1">
-                <FaInfoCircle className="inline" />
-                <span>About</span>
-              </a>
+              <Link to="/house-of-delegates" className="text-white hover:text-amber-300 transition-colors flex items-center gap-1">
+                <FaUsers className="inline" />
+                <span>Delegates</span>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-white hover:text-indigo-300 transition-colors flex items-center gap-1">
+              <Link to="/schedule" className="text-white hover:text-amber-300 transition-colors flex items-center gap-1">
                 <FaCalendarAlt className="inline" />
                 <span>Schedule</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-white hover:text-indigo-300 transition-colors flex items-center gap-1">
-                <FaEnvelope className="inline" />
-                <span>Contact</span>
-              </a>
+              <Link to="/map" className="text-white hover:text-amber-300 transition-colors flex items-center gap-1">
+                <FaMapMarkedAlt className="inline" />
+                <span>Map</span>
+              </Link>
             </li>
           </ul>
         </nav>

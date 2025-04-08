@@ -1,9 +1,9 @@
 import React from 'react';
 import PositionSection from '../components/delegates/PositionSection';
 import Lanterns from '../components/home/Lanterns';
-import { FaDownload, FaFileAlt, FaBook, FaArrowUp } from 'react-icons/fa';
 import { FaSun } from 'react-icons/fa';
 
+// We can use public paths for images instead of imports to fix build errors
 const HouseOfDelegates: React.FC = () => {
   // Candidate data
   const governorCandidates = [
@@ -75,14 +75,6 @@ const HouseOfDelegates: React.FC = () => {
       50% { opacity: 1; filter: brightness(1.1); }
     }
   `;
-
-  // Position descriptions
-  const positionDescriptions = {
-    Governor: "The District Governor leads the California-Nevada-Hawai'i District, ensuring effective communication, planning, and support for board members and clubs. They guide the implementation of initiatives, maintain strong connections with Key Club International, represent our district at major events, and promote the values of Key Club to members of CNH.",
-    Secretary: "The District Secretary keeps the district running smoothly by managing official records, meeting minutes, and service hour tracking. They support club secretaries, oversee the Monthly Report Form, and help board members stay organized and informed through clear, consistent communication.",
-    Treasurer: "The District Treasurer ensures the district stays financially sound by managing dues, budgeting, and fundraising efforts. They guide club treasurers, educate board members on financial processes, and promote creative ways to support district initiatives.",
-    Trustee: "The International Trustee serves as a liaison between our district and Key Club International, representing the interests of CNH on the international level and bringing global initiatives back to our district."
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#241435] via-[#30194a] to-[#3d2160]">
@@ -181,20 +173,6 @@ const HouseOfDelegates: React.FC = () => {
           }}>
             Meet the candidates running for district leadership positions
           </p>
-          
-          {/* Candidates Booklet Download Button */}
-          <div className="mt-4 mb-8">
-            <a 
-              href="https://drive.google.com/file/d/1-a95-bMrYFfqYxNuJEFNDKtMIltayl7j/view?usp=sharing" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-amber-400/80 hover:bg-amber-500/80 text-purple-900 font-medium rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
-            >
-              <FaFileAlt className="mr-2" />
-              Download Candidates Booklet
-              <FaDownload className="ml-2" />
-            </a>
-          </div>
         </div>
       </div>
       
@@ -206,7 +184,6 @@ const HouseOfDelegates: React.FC = () => {
           candidates={governorCandidates} 
           positionColor="bg-tangled-purple"
           className="mb-8"
-          description={positionDescriptions.Governor}
         />
         
         {/* Secretary Section */}
@@ -215,7 +192,6 @@ const HouseOfDelegates: React.FC = () => {
           candidates={secretaryCandidates} 
           positionColor="bg-tangled-sage"
           className="mb-8"
-          description={positionDescriptions.Secretary}
         />
         
         {/* Treasurer Section */}
@@ -224,7 +200,6 @@ const HouseOfDelegates: React.FC = () => {
           candidates={treasurerCandidates} 
           positionColor="bg-tangled-gold"
           className="mb-8"
-          description={positionDescriptions.Treasurer}
         />
         
         {/* Trustee Section */}
@@ -233,44 +208,7 @@ const HouseOfDelegates: React.FC = () => {
           candidates={trusteeCandidates} 
           positionColor="bg-tangled-lavender"
           className="mb-8"
-          description={positionDescriptions.Trustee}
         />
-        
-        {/* PDF Preview Section */}
-        <div className="max-w-5xl mx-auto mt-16 px-4">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center px-6 py-2 bg-amber-400/20 text-amber-300 rounded-full mb-6">
-              <FaBook className="mr-2" />
-              <h2 className="text-xl font-medium">Candidates Booklet Preview</h2>
-            </div>
-            <p className="text-white/70 max-w-2xl mx-auto text-sm mb-8">
-              Browse through the complete candidates booklet below or download it for offline viewing
-            </p>
-          </div>
-          
-          {/* PDF Embed */}
-          <div className="w-full shadow-2xl border border-amber-300/20 rounded-xl overflow-hidden mb-8">
-            <iframe 
-              src="https://drive.google.com/file/d/1-a95-bMrYFfqYxNuJEFNDKtMIltayl7j/preview" 
-              width="100%" 
-              height="600px" 
-              className="w-full border-0"
-              title="Candidates Booklet"
-              allow="autoplay"
-            ></iframe>
-          </div>
-          
-          {/* Back to top button */}
-          <div className="text-center pb-8">
-            <button 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center px-5 py-2 bg-purple-700/50 hover:bg-purple-700/70 text-white rounded-full shadow-md transform transition-all duration-300 hover:scale-105"
-            >
-              <FaArrowUp className="mr-2" />
-              Back to Top
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );

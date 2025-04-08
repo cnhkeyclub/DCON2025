@@ -1,9 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import HouseOfDelegates from './pages/HouseOfDelegates';
 import Map from './pages/Map';
 import Schedule from './pages/Schedule';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -15,11 +16,13 @@ function App() {
             <Home />
           </MainLayout>
         } />
-        <Route path="/delegates" element={
+        <Route path="/house-of-delegates" element={
           <MainLayout>
             <HouseOfDelegates />
           </MainLayout>
         } />
+        {/* Support both paths for backwards compatibility */}
+        <Route path="/delegates" element={<Navigate to="/house-of-delegates" replace />} />
         <Route path="/map" element={
           <MainLayout>
             <Map />
@@ -28,6 +31,13 @@ function App() {
         <Route path="/schedule" element={
           <MainLayout>
             <Schedule />
+          </MainLayout>
+        } />
+        
+        {/* 404 route */}
+        <Route path="*" element={
+          <MainLayout>
+            <NotFound />
           </MainLayout>
         } />
       </Routes>

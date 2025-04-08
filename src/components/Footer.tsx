@@ -1,4 +1,5 @@
-import { FaTwitter, FaFacebook, FaLinkedin, FaInstagram, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaTwitter, FaFacebook, FaInstagram, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 function Footer() {
   return (
@@ -7,18 +8,15 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-bold mb-4">CNHD Conference 2025</h3>
-            <p className="text-slate-300 mb-4">Bringing together the best minds in healthcare innovation.</p>
+            <p className="text-slate-300 mb-4">California-Nevada-Hawai'i District Key Club Convention</p>
             <div className="flex space-x-4">
-              <a href="#" className="text-slate-300 hover:text-white transition-colors">
+              <a href="https://twitter.com/cnhkeyclub" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white transition-colors">
                 <FaTwitter size={20} />
               </a>
-              <a href="#" className="text-slate-300 hover:text-white transition-colors">
+              <a href="https://www.facebook.com/cnhkeyclub" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white transition-colors">
                 <FaFacebook size={20} />
               </a>
-              <a href="#" className="text-slate-300 hover:text-white transition-colors">
-                <FaLinkedin size={20} />
-              </a>
-              <a href="#" className="text-slate-300 hover:text-white transition-colors">
+              <a href="https://www.instagram.com/cnhkeyclub" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white transition-colors">
                 <FaInstagram size={20} />
               </a>
             </div>
@@ -26,26 +24,26 @@ function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-slate-300 hover:text-white transition-colors">Home</a></li>
-              <li><a href="#" className="text-slate-300 hover:text-white transition-colors">About</a></li>
-              <li><a href="#" className="text-slate-300 hover:text-white transition-colors">Schedule</a></li>
-              <li><a href="#" className="text-slate-300 hover:text-white transition-colors">Contact</a></li>
+              <li><Link to="/" className="text-slate-300 hover:text-white transition-colors">Home</Link></li>
+              <li><Link to="/house-of-delegates" className="text-slate-300 hover:text-white transition-colors">House of Delegates</Link></li>
+              <li><Link to="/schedule" className="text-slate-300 hover:text-white transition-colors">Schedule</Link></li>
+              <li><Link to="/map" className="text-slate-300 hover:text-white transition-colors">Map</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
             <p className="text-slate-300 mb-2 flex items-center gap-2">
               <FaEnvelope /> 
-              <span>info@cnhdcon2025.com</span>
+              <span>info@cnhkeyclub.org</span>
             </p>
             <p className="text-slate-300 flex items-center gap-2">
               <FaPhone />
-              <span>(123) 456-7890</span>
+              <span>(909) 989-1500</span>
             </p>
           </div>
         </div>
         <div className="border-t border-slate-700 mt-8 pt-6 text-center text-slate-400">
-          <p>&copy; {new Date().getFullYear()} CNHD Conference. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} CNH Key Club DCON. All rights reserved.</p>
         </div>
       </div>
     </footer>
