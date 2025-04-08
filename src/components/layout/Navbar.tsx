@@ -74,7 +74,11 @@ const Navbar: React.FC = () => {
           {/* Logo/Brand - reduced size */}
           <Link to="/" className="flex items-center group">
             <div className="relative">
-              <FaCrown className="text-tangled-gold text-xl md:text-2xl mr-2" />
+              <img 
+                src="/images/CNHlogo (2).png" 
+                alt="CNH Logo" 
+                className="w-6 h-6 md:w-8 md:h-8 mr-2 object-contain"
+              />
               <div className="absolute inset-0 bg-tangled-gold/20 rounded-full blur-xl scale-150 opacity-70"></div>
             </div>
             <span className="font-tangled text-lg md:text-2xl text-white group-hover:text-tangled-gold transition duration-300">

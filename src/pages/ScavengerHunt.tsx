@@ -1,9 +1,32 @@
-import React from 'react';
-import { FaMapMarkedAlt, FaCheckSquare, FaCamera, FaStar, FaUsers, FaTrophy, FaArrowUp, FaInstagram, FaHeart, FaHashtag, FaHandshake, FaMusic, FaVideo } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaMapMarkedAlt, FaCheckSquare, FaCamera, FaStar, FaUsers, FaTrophy, FaArrowUp, FaInstagram, FaHeart, FaHashtag, FaHandshake, FaMusic, FaVideo, FaCheck } from 'react-icons/fa';
 import { GiPartyPopper, GiDuck } from 'react-icons/gi';
 import Lanterns from '../components/home/Lanterns';
 
 const ScavengerHunt: React.FC = () => {
+  // State to track completed challenges
+  const [completedChallenges, setCompletedChallenges] = useState<number[]>(() => {
+    // Try to load from localStorage on initialization
+    const saved = localStorage.getItem('dcon2025-scavenger-hunt');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // Save to localStorage whenever completedChallenges changes
+  useEffect(() => {
+    localStorage.setItem('dcon2025-scavenger-hunt', JSON.stringify(completedChallenges));
+  }, [completedChallenges]);
+
+  // Toggle completion status for a challenge
+  const toggleCompletion = (id: number) => {
+    setCompletedChallenges(prev => {
+      if (prev.includes(id)) {
+        return prev.filter(challengeId => challengeId !== id);
+      } else {
+        return [...prev, id];
+      }
+    });
+  };
+
   // CSS for text effects
   const keyframesStyles = `
     @keyframes subtle-pulse {
@@ -155,10 +178,14 @@ const ScavengerHunt: React.FC = () => {
                 on social media and collect your special DCON scavenger hunt ribbon when you've completed 
                 the challenge!
               </p>
-              
+
               <div className="bg-purple-900/40 p-4 rounded-lg mt-6">
                 <h3 className="text-lg text-amber-300 font-medium mb-2">Instructions</h3>
                 <ul className="space-y-3">
+                  <li className="flex items-start">
+                    <FaCheckSquare className="text-amber-300 mt-1 mr-2 flex-shrink-0" />
+                    <span>Click on the challenge number to mark it as completed</span>
+                  </li>
                   <li className="flex items-start">
                     <FaCheckSquare className="text-amber-300 mt-1 mr-2 flex-shrink-0" />
                     <span>Screenshot your stories as you complete the Scavenger Hunt</span>
@@ -204,29 +231,49 @@ const ScavengerHunt: React.FC = () => {
             </p>
           </div>
           
-          {/* Scavenger Hunt Items - new grid layout with colorful cards */}
+          {/* Scavenger Hunt Items - new grid layout with smaller, square cards */}
           <div className="mb-12">
             <h2 className="text-2xl md:text-3xl text-amber-300 font-medium text-center mb-8 font-tangled">
               Your Scavenger Hunt Challenges
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {huntItems.map((item) => (
-                <div key={item.id} className="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden shadow-md border border-purple-500/30 hover:border-amber-500/60 transition-all duration-300 hover:shadow-amber-500/20 transform hover:scale-105 group">
-                  <div className="p-5">
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="w-10 h-10 rounded-full bg-purple-700/70 flex items-center justify-center text-amber-300 font-bold border border-amber-300/50 shadow group-hover:bg-amber-500 group-hover:text-purple-900 transition-colors duration-300">
-                        {item.id}
+            
+            {/* Completed challenges counter */}
+            <div className="bg-purple-900/40 rounded-lg p-3 mb-6 text-center">
+              <p className="text-white">
+                <span className="text-amber-300 font-medium">{completedChallenges.length}</span> 
+                <span> of </span>
+                <span className="text-amber-300 font-medium">{huntItems.length}</span> 
+                <span> challenges completed</span>
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {huntItems.map((item) => {
+                const isCompleted = completedChallenges.includes(item.id);
+                return (
+                  <div 
+                    key={item.id} 
+                    className={`aspect-square bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden shadow-md border ${isCompleted ? 'border-green-500/50' : 'border-purple-500/30'} hover:border-amber-500/60 transition-all duration-300 hover:shadow-amber-500/20 transform hover:scale-105 group`}
+                  >
+                    <div className="h-full p-3 flex flex-col">
+                      <div className="flex justify-between items-start mb-2">
+                        <button 
+                          onClick={() => toggleCompletion(item.id)}
+                          className={`w-8 h-8 rounded-full ${isCompleted ? 'bg-green-600' : 'bg-purple-700/70'} flex items-center justify-center text-amber-300 font-bold border border-amber-300/50 shadow transition-colors duration-300`}
+                        >
+                          {isCompleted ? <FaCheck /> : item.id}
+                        </button>
+                        <div className="text-2xl">
+                          {item.icon}
+                        </div>
                       </div>
-                      <div className="text-3xl">
-                        {item.icon}
-                      </div>
+                      <p className="text-white text-sm flex-grow flex items-center">
+                        {item.task}
+                      </p>
                     </div>
-                    <p className="text-white text-lg font-medium">
-                      {item.task}
-                    </p>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
           

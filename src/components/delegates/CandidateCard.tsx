@@ -10,11 +10,27 @@ interface CandidateCardProps {
 const CandidateCard: React.FC<CandidateCardProps> = ({
   name,
   photoUrl,
+  position,
   // Removed unused props from destructuring
 }) => {
   // Extract district code if present (format: "D05S Name")
   const districtCode = name.match(/^D\d+[A-Z]/)?.[0] || '';
   const displayName = name.replace(/^D\d+[A-Z]\s+/, '');
+  
+  // Determine image position adjustment based on candidate name or position
+  const getImagePosition = () => {
+    if (displayName === 'Shaianne Relucio' || districtCode === 'D05N') {
+      return 'translate-y-[15%]'; // Move Shaianne's image down
+    } 
+    else if (displayName === 'Charlize Lin' || districtCode === 'D15S') {
+      return 'translate-y-[3%]'; // Move Shaianne's image down
+    } 
+
+    else if (position === 'Secretary') {
+      return 'translate-y-[5%]'; // Move Secretary candidates' images down
+    }
+    return ''; // No adjustment for other candidates
+  };
   
   return (
     <div className="bg-[#2a1642] rounded-2xl shadow-lg overflow-hidden h-full transform transition-all duration-300 hover:shadow-xl hover:scale-[1.03]">
@@ -26,7 +42,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({
               <img 
                 src={photoUrl} 
                 alt={`Photo of ${displayName}`} 
-                className="w-[85%] h-[85%] object-contain rounded-full"
+                className={`w-[85%] h-auto object-contain transform ${getImagePosition()}`}
               />
             </div>
           ) : (

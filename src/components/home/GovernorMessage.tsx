@@ -66,10 +66,10 @@ const GovernorMessage: React.FC = () => {
                     </p>
                   </div>
                   
-                  <div className="flex justify-end mt-6 md:mt-8">
+                  <div className="flex justify-end mt-3 md:mt-4">
                     <div className="text-right">
                       <p className="font-tangled text-xl md:text-2xl text-tangled-gold mb-1">Austin Alves</p>
-                      <p className="text-xs md:text-sm text-tangled-green">CNH District Governor 2024-2025</p>
+                      <p className="text-xs md:text-sm text-tangled-gold">District Governor 2024-2025</p>
                     </div>
                   </div>
                 </div>
@@ -82,13 +82,15 @@ const GovernorMessage: React.FC = () => {
             <div className="md:col-span-4 md:order-2 order-1 flex justify-center">
               <div className="relative">
                 <div className="absolute -inset-3 bg-tangled-gold/30 rounded-full blur-xl z-0"></div>
-                <div className="w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-tangled-purple shadow-xl relative z-10">
+                <div className="w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-tangled-purple shadow-xl relative z-10 flex items-center justify-center bg-[#241435]/80">
                   {/* Updated with actual governor image */}
-                  <img 
-                    src="/images/governors/austin-alves.png" 
-                    alt="Austin Alves - District Governor" 
-                    className="w-full h-full object-cover object-center"
-                  />
+                  <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
+                    <img 
+                      src="/images/governors/austin-alves.png" 
+                      alt="Austin Alves - District Governor" 
+                      className="w-[85%] h-auto object-contain"
+                    />
+                  </div>
                 </div>
                 <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 bg-tangled-gold text-white text-sm py-2 px-6 rounded-full shadow-lg whitespace-nowrap z-20">
                   District Governor
