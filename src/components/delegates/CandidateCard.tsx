@@ -2,15 +2,13 @@ import React from 'react';
 
 interface CandidateCardProps {
   name: string;
-  position: string;
+  position?: string;
   bio?: string;
   photoUrl?: string;
 }
 
 const CandidateCard: React.FC<CandidateCardProps> = ({
   name,
-  position,
-  bio = "Biography information will be available soon.",
   photoUrl,
 }) => {
   return (

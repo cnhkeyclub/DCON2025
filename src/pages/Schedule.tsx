@@ -235,7 +235,7 @@ const Schedule: React.FC = () => {
                   Friday, April 25, 2025
                 </h2>
                 <div className="relative pl-8 border-l-2 border-amber-300/30">
-                  {fridayEvents.map((event, index) => (
+                  {fridayEvents.map((event) => (
                     <div key={event.id} className="mb-8 relative">
                       {/* Time indicator */}
                       <div className="absolute -left-8 flex flex-col items-center">
@@ -288,7 +288,7 @@ const Schedule: React.FC = () => {
                   Saturday, April 26, 2025
                 </h2>
                 <div className="relative pl-8 border-l-2 border-purple-300/30">
-                  {saturdayEvents.map((event, index) => (
+                  {saturdayEvents.map((event) => (
                     <div key={event.id} className="mb-8 relative">
                       {/* Time indicator */}
                       <div className="absolute -left-8 flex flex-col items-center">
@@ -341,7 +341,7 @@ const Schedule: React.FC = () => {
                   Sunday, April 27, 2025
                 </h2>
                 <div className="relative pl-8 border-l-2 border-blue-300/30">
-                  {sundayEvents.map((event, index) => (
+                  {sundayEvents.map((event) => (
                     <div key={event.id} className="mb-8 relative">
                       {/* Time indicator */}
                       <div className="absolute -left-8 flex flex-col items-center">

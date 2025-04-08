@@ -1,7 +1,7 @@
 import React from 'react';
 import PositionSection from '../components/delegates/PositionSection';
 import Lanterns from '../components/home/Lanterns';
-import { FaCrown, FaScroll, FaDownload, FaFileAlt, FaBook, FaArrowUp } from 'react-icons/fa';
+import { FaDownload, FaFileAlt, FaBook, FaArrowUp } from 'react-icons/fa';
 import { FaSun } from 'react-icons/fa';
 
 const HouseOfDelegates: React.FC = () => {

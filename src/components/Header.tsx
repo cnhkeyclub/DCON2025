@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaHome, FaInfoCircle, FaCalendarAlt, FaEnvelope } from 'react-icons/fa';
 
 function Header() {
