@@ -1,7 +1,7 @@
 import React from 'react';
 import PositionSection from '../components/delegates/PositionSection';
 import Lanterns from '../components/home/Lanterns';
-import { FaCrown, FaScroll } from 'react-icons/fa';
+import { FaCrown, FaScroll, FaDownload, FaFileAlt, FaBook, FaArrowUp } from 'react-icons/fa';
 import { FaSun } from 'react-icons/fa';
 
 const HouseOfDelegates: React.FC = () => {
@@ -10,10 +10,12 @@ const HouseOfDelegates: React.FC = () => {
     {
       name: 'D05S Haley Alberto',
       bio: 'Haley is passionate about service and leadership. She has been an active member of Key Club for 3 years and has served in various club officer positions.',
+      photoUrl: '/images/candidates/haley_alberto.png'
     },
     {
       name: 'D15S Charlize Lin',
       bio: 'Charlize has demonstrated exceptional leadership skills throughout her Key Club journey. She believes in empowering members to make a positive impact in their communities.',
+      photoUrl: '/images/candidates/charlize_lin.png'
     },
   ];
 
@@ -21,14 +23,17 @@ const HouseOfDelegates: React.FC = () => {
     {
       name: 'D22M Malakai Keawe-Correa',
       bio: 'Malakai is dedicated to improving communication within the district. With his organizational skills, he aims to streamline processes and enhance reporting systems.',
+      photoUrl: '/images/candidates/malakai_keawe_correa.png'
     },
     {
       name: 'D35W Emily Lin',
       bio: 'Emily has a strong background in documentation and record-keeping. She plans to implement innovative strategies to make information more accessible to all clubs.',
+      photoUrl: '/images/candidates/emily_lin.png'
     },
     {
       name: 'D03S Jacklyn Song',
       bio: 'Jacklyn brings creativity and precision to all her endeavors. She is committed to maintaining accurate records and facilitating effective communication.',
+      photoUrl: '/images/candidates/jacklyn_song.png'
     },
   ];
 
@@ -36,18 +41,22 @@ const HouseOfDelegates: React.FC = () => {
     {
       name: 'D36N Ward Halwani',
       bio: 'Ward has experience in managing finances for various organizations. He is dedicated to ensuring transparent financial practices and responsible resource allocation.',
+      photoUrl: '/images/candidates/ward_halwani.png'
     },
     {
       name: 'D07N Katelynn Nguyen',
       bio: 'Katelynn is passionate about financial literacy and education. She plans to implement training programs to help clubs better manage their finances.',
+      photoUrl: '/images/candidates/katelynn_nguyen.png'
     },
     {
       name: 'D05N Shaianne Relucio',
       bio: 'Shaianne has a background in accounting and budget management. She is committed to maximizing the impact of district funds for service projects.',
+      photoUrl: '/images/candidates/shaianne_relucio.png'
     },
     {
       name: 'D16W Taye Sangkhae',
       bio: 'Taye believes in fiscal responsibility and transparency. He aims to develop sustainable financial strategies for the long-term success of the district.',
+      photoUrl: '/images/candidates/taye_sangkhae.png'
     },
   ];
 
@@ -55,6 +64,7 @@ const HouseOfDelegates: React.FC = () => {
     {
       name: 'D28S Tyler Moran',
       bio: 'Tyler is committed to strengthening the connection between our district and Kiwanis International. He plans to advocate for resources and support to help our district thrive.',
+      photoUrl: '/images/candidates/tyler_moran.jpeg'
     },
   ];
 
@@ -65,6 +75,14 @@ const HouseOfDelegates: React.FC = () => {
       50% { opacity: 1; filter: brightness(1.1); }
     }
   `;
+
+  // Position descriptions
+  const positionDescriptions = {
+    Governor: "The District Governor leads the California-Nevada-Hawai'i District, ensuring effective communication, planning, and support for board members and clubs. They guide the implementation of initiatives, maintain strong connections with Key Club International, represent our district at major events, and promote the values of Key Club to members of CNH.",
+    Secretary: "The District Secretary keeps the district running smoothly by managing official records, meeting minutes, and service hour tracking. They support club secretaries, oversee the Monthly Report Form, and help board members stay organized and informed through clear, consistent communication.",
+    Treasurer: "The District Treasurer ensures the district stays financially sound by managing dues, budgeting, and fundraising efforts. They guide club treasurers, educate board members on financial processes, and promote creative ways to support district initiatives.",
+    Trustee: "The International Trustee serves as a liaison between our district and Key Club International, representing the interests of CNH on the international level and bringing global initiatives back to our district."
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#241435] via-[#30194a] to-[#3d2160]">
@@ -163,6 +181,20 @@ const HouseOfDelegates: React.FC = () => {
           }}>
             Meet the candidates running for district leadership positions
           </p>
+          
+          {/* Candidates Booklet Download Button */}
+          <div className="mt-4 mb-8">
+            <a 
+              href="https://drive.google.com/file/d/1-a95-bMrYFfqYxNuJEFNDKtMIltayl7j/view?usp=sharing" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 bg-amber-400/80 hover:bg-amber-500/80 text-purple-900 font-medium rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            >
+              <FaFileAlt className="mr-2" />
+              Download Candidates Booklet
+              <FaDownload className="ml-2" />
+            </a>
+          </div>
         </div>
       </div>
       
@@ -174,6 +206,7 @@ const HouseOfDelegates: React.FC = () => {
           candidates={governorCandidates} 
           positionColor="bg-tangled-purple"
           className="mb-8"
+          description={positionDescriptions.Governor}
         />
         
         {/* Secretary Section */}
@@ -182,6 +215,7 @@ const HouseOfDelegates: React.FC = () => {
           candidates={secretaryCandidates} 
           positionColor="bg-tangled-sage"
           className="mb-8"
+          description={positionDescriptions.Secretary}
         />
         
         {/* Treasurer Section */}
@@ -190,6 +224,7 @@ const HouseOfDelegates: React.FC = () => {
           candidates={treasurerCandidates} 
           positionColor="bg-tangled-gold"
           className="mb-8"
+          description={positionDescriptions.Treasurer}
         />
         
         {/* Trustee Section */}
@@ -198,7 +233,44 @@ const HouseOfDelegates: React.FC = () => {
           candidates={trusteeCandidates} 
           positionColor="bg-tangled-lavender"
           className="mb-8"
+          description={positionDescriptions.Trustee}
         />
+        
+        {/* PDF Preview Section */}
+        <div className="max-w-5xl mx-auto mt-16 px-4">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center px-6 py-2 bg-amber-400/20 text-amber-300 rounded-full mb-6">
+              <FaBook className="mr-2" />
+              <h2 className="text-xl font-medium">Candidates Booklet Preview</h2>
+            </div>
+            <p className="text-white/70 max-w-2xl mx-auto text-sm mb-8">
+              Browse through the complete candidates booklet below or download it for offline viewing
+            </p>
+          </div>
+          
+          {/* PDF Embed */}
+          <div className="w-full shadow-2xl border border-amber-300/20 rounded-xl overflow-hidden mb-8">
+            <iframe 
+              src="https://drive.google.com/file/d/1-a95-bMrYFfqYxNuJEFNDKtMIltayl7j/preview" 
+              width="100%" 
+              height="600px" 
+              className="w-full border-0"
+              title="Candidates Booklet"
+              allow="autoplay"
+            ></iframe>
+          </div>
+          
+          {/* Back to top button */}
+          <div className="text-center pb-8">
+            <button 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="inline-flex items-center px-5 py-2 bg-purple-700/50 hover:bg-purple-700/70 text-white rounded-full shadow-md transform transition-all duration-300 hover:scale-105"
+            >
+              <FaArrowUp className="mr-2" />
+              Back to Top
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

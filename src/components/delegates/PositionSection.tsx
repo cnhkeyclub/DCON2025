@@ -14,13 +14,15 @@ interface PositionSectionProps {
   candidates: Candidate[];
   positionColor?: string;
   className?: string;
+  description?: string;
 }
 
 const PositionSection: React.FC<PositionSectionProps> = ({
   title,
   candidates,
   positionColor = 'bg-tangled-purple',
-  className = ''
+  className = '',
+  description
 }) => {
   // Determine if this is the Trustee section
   const isTrusteeSection = title === 'Trustee';
@@ -65,6 +67,15 @@ const PositionSection: React.FC<PositionSectionProps> = ({
           <div className="w-32 h-1 bg-gradient-to-r from-transparent via-amber-300 to-transparent mx-auto mb-3"></div>
           <p className="text-gray-200/70 max-w-xl mx-auto text-sm">Meet the candidates for District {title}</p>
         </div>
+        
+        {/* Position Description */}
+        {description && (
+          <div className="max-w-3xl mx-auto mb-8 px-6 py-4 bg-white/5 rounded-lg border border-amber-300/20 shadow-lg">
+            <p className="text-white/90 text-sm md:text-base leading-relaxed">
+              {description}
+            </p>
+          </div>
+        )}
         
         {/* Carousel Layout - like cafe cards */}
         <div className="max-w-6xl mx-auto">
