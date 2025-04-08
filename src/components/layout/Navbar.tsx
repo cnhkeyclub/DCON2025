@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaCrown } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaMapMarkedAlt, FaCheckSquare, FaCamera, FaStar, FaUsers, FaTrophy, FaArrowUp, FaInstagram, FaHeart, FaHashtag, FaHandshake, FaMusic, FaVideo, FaCheck } from 'react-icons/fa';
+import { FaMapMarkedAlt, FaCheckSquare, FaCamera, FaStar, FaUsers, FaArrowUp, FaInstagram, FaHeart, FaHashtag, FaHandshake, FaMusic, FaVideo, FaCheck } from 'react-icons/fa';
 import { GiPartyPopper, GiDuck } from 'react-icons/gi';
 import Lanterns from '../components/home/Lanterns';
 

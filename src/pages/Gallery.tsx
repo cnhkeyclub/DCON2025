@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaCamera, FaSearch, FaArrowUp, FaCalendarDay } from 'react-icons/fa';
+import { FaCamera, FaSearch, FaArrowUp } from 'react-icons/fa';
 import Lanterns from '../components/home/Lanterns';
 import Carousel from '../components/shared/Carousel';
 
@@ -12,7 +12,8 @@ interface GalleryImage {
 }
 
 const Gallery: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  // Using _ prefix to indicate the setter is intentionally unused
+  const [activeCategory, _setActiveCategory] = useState<string | null>(null);
   const [activeDay, setActiveDay] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
@@ -143,14 +144,6 @@ const Gallery: React.FC = () => {
         return 'from-gray-400 to-gray-600';
     }
   };
-
-  // Categories for filtering
-  const categories = [
-    { id: 'leadership', name: 'Leadership' },
-    { id: 'service', name: 'Service Projects' },
-    { id: 'workshop', name: 'Workshops' },
-    { id: 'social', name: 'Social Events' }
-  ];
 
   // Days for filtering
   const days = ['Friday', 'Saturday', 'Sunday'];
