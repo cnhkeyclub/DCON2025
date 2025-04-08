@@ -21,12 +21,23 @@ export default {
       animation: {
         'spin-slow': 'spin 3s linear infinite',
         'float': 'float 8s ease-in-out infinite',
+        'float-slow': 'float 15s ease-in-out infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'float-particle': 'floatParticle 10s ease-in-out infinite',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         },
+        floatParticle: {
+          '0%': { transform: 'translateY(0) translateX(0)', opacity: '0' },
+          '50%': { opacity: '1' },
+          '100%': { transform: 'translateY(-50px) translateX(20px)', opacity: '0' },
+        },
+      },
+      backgroundImage: {
+        'radial-gold': 'radial-gradient(circle, rgba(253,187,45,0.3) 0%, rgba(253,187,45,0) 70%)',
       },
     },
   },

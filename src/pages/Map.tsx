@@ -1,118 +1,176 @@
 import React from 'react';
-import { FaMapMarkedAlt, FaMapMarkerAlt, FaInfoCircle } from 'react-icons/fa';
+import { FaMapMarkedAlt, FaDownload } from 'react-icons/fa';
+import Lanterns from '../components/home/Lanterns';
+import mapLevel1 from '../assets/images/MAP_LEVEL1.png';
+import mapLevel2 from '../assets/images/MAP_LEVEL2.png';
 
 const Map: React.FC = () => {
+  // CSS for text effects
+  const keyframesStyles = `
+    @keyframes subtle-pulse {
+      0%, 100% { opacity: 0.9; filter: brightness(1); }
+      50% { opacity: 1; filter: brightness(1.1); }
+    }
+  `;
+
   return (
-    <div className="pt-20">
-      {/* Banner */}
-      <div className="bg-gradient-to-r from-tangled-purple to-tangled-green py-16 relative overflow-hidden">
-        {/* Decorative elements */}
+    <div className="min-h-screen bg-gradient-to-b from-[#241435] via-[#30194a] to-[#3d2160]">
+      {/* Inject keyframes */}
+      <style dangerouslySetInnerHTML={{ __html: keyframesStyles }} />
+      
+      {/* Enhanced Header Banner with lantern styling */}
+      <div className="relative min-h-[60vh] pt-16 overflow-hidden">
+        {/* Dark purple background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A0E2E] via-[#261339] to-[#362154]"></div>
+        
+        {/* Stars - subtle background elements */}
+        {[...Array(50)].map((_, i) => (
+          <div 
+            key={i}
+            className="absolute rounded-full bg-white"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 2 + 0.5}px`,
+              height: `${Math.random() * 2 + 0.5}px`,
+              opacity: Math.random() * 0.5 + 0.1,
+              animation: `twinkle ${Math.random() * 5 + 3}s ease-in-out infinite`,
+              animationDelay: `${Math.random() * 5}s`
+            }}
+          ></div>
+        ))}
+        
+        {/* Main Lanterns - centralized and fullscreen */}
+        <div className="absolute inset-0 overflow-visible" style={{ height: '100vh' }}>
+          <Lanterns count={15} className="opacity-90" />
+        </div>
+        
+        {/* Subtle particle effect */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/tangled-pattern.png')] bg-repeat opacity-5"></div>
+          {[...Array(20)].map((_, i) => (
+            <div 
+              key={i}
+              className="absolute w-1 h-1 rounded-full bg-amber-300/20 animate-float-slow"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${10 + Math.random() * 15}s`
+              }}
+            ></div>
+          ))}
         </div>
         
-        <div className="absolute -top-10 -left-10 w-40 h-40 bg-tangled-gold/20 rounded-full blur-xl"></div>
-        <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-tangled-purple/20 rounded-full blur-xl"></div>
+        {/* Enhanced radial glows */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-300/15 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl"></div>
         
-        <div className="container mx-auto px-6 text-center relative z-10">
+        {/* Content */}
+        <div className="container mx-auto px-6 pt-12 pb-16 text-center relative z-10">
           <div className="mb-6">
-            <FaMapMarkedAlt className="text-tangled-gold text-4xl mx-auto mb-4" />
+            <h4 className="text-base md:text-xl text-amber-200 font-light mb-2">
+              California-Nevada-Hawai'i Key Club
+            </h4>
           </div>
           
-          <h1 className="font-tangled text-4xl md:text-6xl text-white mb-6">
-            Venue Map
-          </h1>
+          {/* Title with styling similar to House of Delegates page */}
+          <div className="flex items-center justify-center mb-6">
+            <div className="relative">
+              <h1 className="font-tangled text-4xl md:text-7xl lg:text-8xl leading-tight flex items-center justify-center">
+                <span className="mr-4 inline-block">
+                  <FaMapMarkedAlt className="text-yellow-300 text-3xl md:text-5xl transform rotate-12 animate-pulse" 
+                    style={{filter: "drop-shadow(0 0 10px rgba(255, 200, 0, 0.6))"}} 
+                  />
+                </span>
+                <span 
+                  className="bg-clip-text text-transparent" 
+                  style={{
+                    backgroundImage: "linear-gradient(to bottom, #FFFFFF 0%, #FFFDE7 30%, #FFF9C4 60%, #FFEE58 100%)",
+                    textShadow: "0 1px 4px rgba(255, 255, 255, 0.4), 0 4px 8px rgba(255, 236, 179, 0.2)",
+                    filter: "drop-shadow(0 1px 4px rgba(255, 255, 255, 0.4))"
+                  }}
+                >
+                  Venue Map
+                </span>
+                <span className="ml-4 inline-block">
+                  <FaMapMarkedAlt className="text-yellow-300 text-3xl md:text-5xl transform -rotate-12 animate-pulse" 
+                    style={{filter: "drop-shadow(0 0 10px rgba(255, 200, 0, 0.6))"}} 
+                  />
+                </span>
+              </h1>
+              <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-3/4 h-0.5 bg-gradient-to-r from-transparent via-yellow-300 to-transparent"></div>
+            </div>
+          </div>
           
-          <p className="text-tangled-yellow text-xl max-w-2xl mx-auto mb-8">
-            Find your way around the DCON 2025 event spaces
+          <p className="text-amber-200 text-sm md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed font-tangled" style={{
+            background: "linear-gradient(to bottom, #FFD54F 0%, #FFB74D 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            filter: "drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3))"
+          }}>
+            Find your way around DCON 2025
           </p>
-          
-          <div className="w-32 h-1 bg-tangled-gold/70 mx-auto"></div>
         </div>
       </div>
       
-      {/* Main Content */}
-      <div className="container mx-auto px-6 py-12">
-        {/* Location Info */}
-        <div className="max-w-4xl mx-auto mb-12 text-center">
-          <h2 className="text-3xl font-bold text-tangled-purple mb-4">Main Event Venue</h2>
-          <p className="text-lg text-gray-700 mb-6">
-            California-Nevada-Hawaii District Convention 2025 will be held at the Tangled Kingdom Resort & Conference Center.
-          </p>
-          <div className="bg-tangled-purple/10 p-6 rounded-lg inline-block">
-            <p className="flex items-center justify-center text-tangled-purple font-medium">
-              <FaMapMarkerAlt className="mr-2 text-tangled-gold" />
-              123 Corona Blvd, Sunshine Bay, CA 94000
-            </p>
-          </div>
-        </div>
-        
-        {/* Interactive Map Placeholder */}
-        <div className="bg-gray-200 rounded-xl overflow-hidden shadow-lg mb-12 max-w-5xl mx-auto aspect-[16/9] flex items-center justify-center relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-tangled-purple/30 to-tangled-gold/30"></div>
-          <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-lg z-10 max-w-md">
-            <FaMapMarkedAlt className="text-5xl text-tangled-gold mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-tangled-purple mb-2">Interactive Map</h3>
-            <p className="text-gray-700 mb-4">
-              An interactive venue map will be available closer to the event date. Check back soon!
-            </p>
-            <div className="flex items-center justify-center gap-2 text-sm text-tangled-purple/70">
-              <FaInfoCircle /> 
-              <span>Map updates will be announced via email and social media.</span>
+      {/* Main content section for maps */}
+      <div className="relative pt-8 pb-20 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto">
+          {/* First Floor Map Section */}
+          <div className="mb-16">
+            <div className="bg-[#2c1b48]/70 rounded-lg p-6 backdrop-blur-sm mb-6">
+              <h2 className="text-2xl md:text-3xl text-amber-300 font-medium mb-4 text-center">First Floor</h2>
+            </div>
+            
+            {/* Image container with download button */}
+            <div className="relative group">
+              {/* First floor map image */}
+              <div className="rounded-lg overflow-hidden border border-amber-300/20">
+                <img 
+                  src={mapLevel1} 
+                  alt="First Floor Map" 
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              
+              {/* Download button that appears on hover */}
+              <a 
+                href={mapLevel1} 
+                download="DCON-2025-First-Floor-Map.png"
+                className="absolute bottom-4 right-4 bg-amber-300 text-purple-900 font-medium px-4 py-2 rounded-full 
+                  flex items-center gap-2 opacity-90 hover:opacity-100 transition-all shadow-lg hover:shadow-amber-300/50"
+              >
+                <FaDownload /> Download Map
+              </a>
             </div>
           </div>
-        </div>
-        
-        {/* Key Locations */}
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-tangled-purple mb-6 text-center">Key Locations</h2>
           
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-tangled-gold">
-              <h3 className="text-xl font-bold text-tangled-purple mb-2">Main Ballroom</h3>
-              <p className="text-gray-700">
-                Located on the first floor, the Main Ballroom hosts opening and closing ceremonies, general sessions, and evening events.
-              </p>
+          {/* Second Floor Map Section */}
+          <div>
+            <div className="bg-[#2c1b48]/70 rounded-lg p-6 backdrop-blur-sm mb-6">
+              <h2 className="text-2xl md:text-3xl text-amber-300 font-medium mb-4 text-center">Second Floor</h2>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-tangled-purple">
-              <h3 className="text-xl font-bold text-tangled-purple mb-2">Workshop Rooms</h3>
-              <p className="text-gray-700">
-                Workshop sessions are held in the Corona Wing (2nd floor), with rooms labeled C201-C210.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-tangled-green">
-              <h3 className="text-xl font-bold text-tangled-purple mb-2">House of Delegates</h3>
-              <p className="text-gray-700">
-                All House of Delegates sessions take place in the Kingdom Hall (3rd floor).
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-tangled-sage">
-              <h3 className="text-xl font-bold text-tangled-purple mb-2">Dining Area</h3>
-              <p className="text-gray-700">
-                Meals are served in the Lantern Dining Hall, located on the first floor adjacent to the courtyard.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Additional Information */}
-      <div className="bg-gray-100 py-12">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-tangled-purple mb-6">Getting Around</h2>
-            <p className="text-lg text-gray-700 mb-8">
-              Directional signage will be placed throughout the venue. DCON volunteers in purple vests will be available to help you navigate to your sessions.
-            </p>
-            
-            <div className="inline-block bg-white p-6 rounded-lg shadow-md border border-tangled-gold/30">
-              <h3 className="text-xl font-bold text-tangled-purple mb-3">Need Assistance?</h3>
-              <p className="text-gray-700">
-                Visit the Information Desk in the Main Lobby or contact the DCON team at <a href="mailto:info@cnhdcon2025.org" className="text-tangled-gold hover:underline">info@cnhdcon2025.org</a>
-              </p>
+            {/* Image container with download button */}
+            <div className="relative group">
+              {/* Second floor map image */}
+              <div className="rounded-lg overflow-hidden border border-amber-300/20">
+                <img 
+                  src={mapLevel2} 
+                  alt="Second Floor Map" 
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              
+              {/* Download button that appears on hover */}
+              <a 
+                href={mapLevel2} 
+                download="DCON-2025-Second-Floor-Map.png"
+                className="absolute bottom-4 right-4 bg-amber-300 text-purple-900 font-medium px-4 py-2 rounded-full 
+                  flex items-center gap-2 opacity-90 hover:opacity-100 transition-all shadow-lg hover:shadow-amber-300/50"
+              >
+                <FaDownload /> Download Map
+              </a>
             </div>
           </div>
         </div>

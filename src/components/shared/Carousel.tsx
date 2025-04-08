@@ -6,13 +6,15 @@ interface CarouselProps {
   autoSlide?: boolean;
   autoSlideInterval?: number;
   className?: string;
+  hideArrowsForSingleSlide?: boolean;
 }
 
 const Carousel: React.FC<CarouselProps> = ({
   children,
   autoSlide = false,
   autoSlideInterval = 5000,
-  className = ''
+  className = '',
+  hideArrowsForSingleSlide = false
 }) => {
   const [current, setCurrent] = useState(0);
   const childrenArray = React.Children.toArray(children);
@@ -40,6 +42,9 @@ const Carousel: React.FC<CarouselProps> = ({
     return null;
   }
 
+  // Determine if arrows should be shown
+  const showArrows = !(hideArrowsForSingleSlide && length === 1);
+
   return (
     <div className={`relative w-full overflow-hidden ${className}`}>
       <div 
@@ -53,37 +58,43 @@ const Carousel: React.FC<CarouselProps> = ({
         ))}
       </div>
 
-      {/* Navigation buttons */}
-      <button 
-        className="absolute top-1/2 left-2 z-10 -translate-y-1/2 bg-tangled-purple/50 hover:bg-tangled-purple text-white p-2 rounded-full"
-        onClick={prevSlide}
-        aria-label="Previous slide"
-      >
-        <FaChevronLeft />
-      </button>
-      <button 
-        className="absolute top-1/2 right-2 z-10 -translate-y-1/2 bg-tangled-purple/50 hover:bg-tangled-purple text-white p-2 rounded-full"
-        onClick={nextSlide}
-        aria-label="Next slide"
-      >
-        <FaChevronRight />
-      </button>
-
-      {/* Indicators */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {childrenArray.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`text-xs transition-colors duration-300 ${
-              index === current ? 'text-tangled-gold' : 'text-white/50'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
+      {/* Navigation buttons - conditionally rendered */}
+      {showArrows && (
+        <>
+          <button 
+            className="absolute top-1/2 left-2 z-10 -translate-y-1/2 bg-tangled-purple/50 hover:bg-tangled-purple text-white p-2 rounded-full"
+            onClick={prevSlide}
+            aria-label="Previous slide"
           >
-            <FaCircle />
+            <FaChevronLeft />
           </button>
-        ))}
-      </div>
+          <button 
+            className="absolute top-1/2 right-2 z-10 -translate-y-1/2 bg-tangled-purple/50 hover:bg-tangled-purple text-white p-2 rounded-full"
+            onClick={nextSlide}
+            aria-label="Next slide"
+          >
+            <FaChevronRight />
+          </button>
+        </>
+      )}
+
+      {/* Indicators - only show if there's more than one slide */}
+      {length > 1 && (
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {childrenArray.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`text-xs transition-colors duration-300 ${
+                index === current ? 'text-tangled-gold' : 'text-white/50'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            >
+              <FaCircle />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

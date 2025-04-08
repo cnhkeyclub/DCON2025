@@ -4,6 +4,7 @@ import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import HouseOfDelegates from './pages/HouseOfDelegates';
 import Map from './pages/Map';
+import Schedule from './pages/Schedule';
 
 function App() {
   return (
@@ -23,6 +24,11 @@ function App() {
         <Route path="/map" element={
           <MainLayout>
             <Map />
+          </MainLayout>
+        } />
+        <Route path="/schedule" element={
+          <MainLayout>
+            <Schedule />
           </MainLayout>
         } />
       </Routes>

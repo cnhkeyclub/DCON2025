@@ -1,31 +1,34 @@
 import React from 'react';
 import { 
   FaCalendarAlt, 
-  FaUserFriends, 
-  FaTrophy, 
-  FaFileAlt, 
   FaCamera, 
-  FaHandsHelping,
   FaSun,
-  FaMapMarkerAlt,
-  FaUsers
+  FaUserTie,
+  FaChalkboardTeacher
 } from 'react-icons/fa';
 
-// Card component for each quick link
+// Card component for each quick link - now styled as a bubbly app icon with enhanced visual effects
 const QuickLinkCard: React.FC<{
   icon: React.ReactNode;
   title: string;
-  description: string;
   linkUrl: string;
-}> = ({ icon, title, description, linkUrl }) => {
+}> = ({ icon, title, linkUrl }) => {
   return (
     <a 
       href={linkUrl}
-      className="block p-6 bg-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 border border-tangled-lavender/10"
+      className="flex flex-col items-center justify-center w-[45%] sm:w-auto mb-8 sm:mb-0 group"
     >
-      <div className="text-tangled-gold text-4xl mb-4">{icon}</div>
-      <h3 className="font-tangled text-xl text-tangled-purple mb-2">{title}</h3>
-      <p className="text-gray-600 text-sm">{description}</p>
+      <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-2xl bg-gradient-to-br from-purple-900/40 to-violet-800/60 shadow-lg border-2 border-tangled-gold/70 hover:transform hover:scale-110 transition-all duration-300 mb-2 outline outline-1 outline-white/40 group-hover:outline-tangled-gold/60 overflow-hidden">
+        {/* Subtle animated glow effect */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-tangled-gold/5 to-amber-400/10 animate-pulse-slow opacity-50"></div>
+        
+        {/* Subtle radial gradient behind the icon */}
+        <div className="absolute inset-0 bg-radial-gold opacity-40"></div>
+        
+        {/* Icon with enhanced visibility */}
+        <div className="relative z-10 text-amber-300 text-2xl md:text-3xl drop-shadow-[0_2px_4px_rgba(251,191,36,0.7)]">{icon}</div>
+      </div>
+      <h3 className="font-tangled text-xs md:text-sm text-white text-center mt-2 group-hover:text-tangled-gold transition-colors duration-300">{title}</h3>
     </a>
   );
 };
@@ -35,38 +38,22 @@ const QuickLinks: React.FC = () => {
     {
       icon: <FaCalendarAlt />,
       title: 'Schedule',
-      description: 'View the full convention schedule and plan your weekend',
       linkUrl: '/schedule'
     },
     {
-      icon: <FaMapMarkerAlt />,
-      title: 'Venue',
-      description: 'Explore our convention venue and find your way around',
-      linkUrl: '/venue'
+      icon: <FaUserTie />,
+      title: 'House of Delegates',
+      linkUrl: '/delegates'
     },
     {
-      icon: <FaUsers />,
+      icon: <FaChalkboardTeacher />,
       title: 'Workshops',
-      description: 'Browse our selection of leadership and service workshops',
       linkUrl: '/workshops'
     },
     {
       icon: <FaCamera />,
       title: 'Gallery',
-      description: 'Photos from past events and convention highlights',
       linkUrl: '/gallery'
-    },
-    {
-      icon: <FaHandsHelping />,
-      title: 'Service Projects',
-      description: 'Join our service initiatives during the convention',
-      linkUrl: '/service'
-    },
-    {
-      icon: <FaUsers />,
-      title: 'Contests',
-      description: 'Check out the various contests and competitions',
-      linkUrl: '/contests'
     }
   ];
 
@@ -103,32 +90,45 @@ const QuickLinks: React.FC = () => {
         </svg>
       </div>
       
-      {/* Decorative sun emblem */}
-      <div className="absolute top-40 left-10 opacity-10">
-        <FaSun className="text-tangled-gold text-8xl" />
+      {/* Enhanced decorative elements */}
+      <div className="absolute top-40 left-10 opacity-15">
+        <FaSun className="text-tangled-gold text-8xl animate-spin-slow" />
       </div>
-      <div className="absolute bottom-10 right-10 opacity-10">
-        <FaSun className="text-tangled-gold text-6xl" />
+      <div className="absolute bottom-10 right-10 opacity-15">
+        <FaSun className="text-tangled-gold text-6xl animate-spin-slow" />
       </div>
       
-      {/* Diagonal decorative line */}
+      {/* Enhanced diagonal decorative lines with glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 -left-1/4 w-full h-1 bg-tangled-gold/10 transform rotate-45"></div>
-        <div className="absolute bottom-0 -right-1/4 w-full h-1 bg-tangled-gold/10 transform rotate-45"></div>
+        <div className="absolute top-0 -left-1/4 w-full h-1 bg-gradient-to-r from-tangled-gold/5 via-tangled-gold/30 to-tangled-gold/5 transform rotate-45"></div>
+        <div className="absolute bottom-0 -right-1/4 w-full h-1 bg-gradient-to-r from-tangled-gold/5 via-tangled-gold/30 to-tangled-gold/5 transform rotate-45"></div>
+      </div>
+      
+      {/* Floating particles effect */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(6)].map((_, i) => (
+          <div 
+            key={i}
+            className="absolute w-2 h-2 rounded-full bg-tangled-gold/20 animate-float-particle"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`
+            }}
+          ></div>
+        ))}
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="font-tangled text-3xl md:text-4xl lg:text-5xl text-white mb-4 text-shadow-md">Quick Links</h2>
-          <p className="text-white/80 max-w-2xl mx-auto my-4">
-            Everything you need to know about Tangled in Service DCON 2025
-          </p>
-          <div className="w-24 h-1 bg-tangled-gold mx-auto mt-6"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-tangled-gold to-transparent mx-auto"></div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* Layout: 2x2 on mobile, all in one row on desktop */}
+        <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-6 sm:gap-8 md:gap-10 lg:gap-16 mx-auto">
           {links.map((link, index) => (
-            <QuickLinkCard key={index} icon={link.icon} title={link.title} description={link.description} linkUrl={link.linkUrl} />
+            <QuickLinkCard key={index} icon={link.icon} title={link.title} linkUrl={link.linkUrl} />
           ))}
         </div>
       </div>
