@@ -42,15 +42,13 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '#about' },
     { name: 'House of Delegates', path: '/delegates' },
     { name: 'Schedule', path: '/schedule' },
     { name: 'Map', path: '/map' },
     { name: 'Workshops', path: '#workshops' },
     { name: 'Contests', path: '#contests' },
-    { name: 'Gallery', path: '#gallery' },
-    { name: 'FAQ', path: '#faq' },
-    { name: 'Contact', path: '#contact' },
+    { name: 'Gallery', path: '/gallery' },
+    { name: 'FAQ', path: '/faq' },
   ];
 
   const handleLinkClick = (path: string) => {

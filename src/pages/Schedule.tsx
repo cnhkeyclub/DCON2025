@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaCalendarAlt, FaMapMarkerAlt, FaUser, FaChevronRight } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt, FaUser, FaArrowUp } from 'react-icons/fa';
 import Lanterns from '../components/home/Lanterns';
 
 // Define schedule item type
@@ -12,6 +12,7 @@ interface ScheduleItem {
   subtitle?: string;
   location: string;
   presenter?: string;
+  isHighlighted?: boolean;
 }
 
 const Schedule: React.FC = () => {
@@ -46,6 +47,7 @@ const Schedule: React.FC = () => {
     { id: 'fri-11', day: 'Friday', startTime: '5:30pm', endTime: '6:10pm', title: 'Education Session 1', subtitle: '(40 min session)', location: 'Various Rooms' },
     { id: 'fri-12', day: 'Friday', startTime: '6:00pm', endTime: '7:00pm', title: 'Scrapbook Judging', location: 'Room 103 (MR Room)' },
     { id: 'fri-13', day: 'Friday', startTime: '6:20pm', endTime: '7:00pm', title: 'Education Session 2', subtitle: '(40 min session)', location: 'Various Rooms' },
+    { id: 'fri-dinner', day: 'Friday', startTime: '7:00pm', endTime: '8:30pm', title: 'DINNER ON OWN', location: '', isHighlighted: true },
     { id: 'fri-14', day: 'Friday', startTime: '7:10pm', endTime: '8:15pm', title: 'Advisor/Chaperone Security Briefing', subtitle: '(Mandatory)', location: 'Ballroom C' },
     { id: 'fri-15', day: 'Friday', startTime: '7:10pm', endTime: '8:15pm', title: 'Region Sessions', location: 'Various Rooms' },
     { id: 'fri-16', day: 'Friday', startTime: '8:30pm', endTime: '10:30pm', title: 'First General Session', subtitle: '(Keynote)', location: 'Exhibit Hall A' },
@@ -100,7 +102,7 @@ const Schedule: React.FC = () => {
       case 'Saturday':
         return 'from-purple-400 to-purple-600';
       case 'Sunday':
-        return 'from-blue-400 to-blue-600';
+        return 'from-emerald-400 to-emerald-600';
       default:
         return 'from-gray-400 to-gray-600';
     }
@@ -208,14 +210,15 @@ const Schedule: React.FC = () => {
       
       {/* Schedule Content Section */}
       <div className="relative pt-8 pb-20 px-4 md:px-8">
-        <div className="max-w-7xl mx-auto">
+        {/* Reduced max-width to make layout smaller on web view */}
+        <div className="max-w-4xl mx-auto">
           {/* Filter Buttons */}
           <div className="flex flex-wrap justify-center gap-3 mb-8">
             {['All', 'Friday', 'Saturday', 'Sunday'].map((day) => (
               <button
                 key={day}
                 onClick={() => setSelectedDay(day as 'All' | 'Friday' | 'Saturday' | 'Sunday')}
-                className={`py-2 px-6 rounded-full font-medium transition-all duration-300 ${
+                className={`py-2 px-8 rounded-full font-medium transition-all duration-300 ${
                   selectedDay === day 
                     ? 'bg-amber-300 text-purple-900 shadow-lg' 
                     : 'bg-[#2c1b48] text-white/80 hover:bg-[#3c2a58] hover:text-white'
@@ -227,11 +230,11 @@ const Schedule: React.FC = () => {
           </div>
 
           {/* Calendar View with Cards */}
-          <div className="space-y-10">
+          <div className="space-y-12">
             {/* Only show sections for the days that are included in the filtered events */}
             {(selectedDay === 'All' || selectedDay === 'Friday') && fridayEvents.length > 0 && (
               <div className="space-y-6">
-                <h2 className="text-2xl md:text-3xl text-amber-300 font-medium text-center mb-4 font-tangled">
+                <h2 className="text-2xl md:text-4xl text-amber-300 font-medium text-center mb-6 font-tangled">
                   Friday, April 25, 2025
                 </h2>
                 <div className="relative pl-8 border-l-2 border-amber-300/30">
@@ -243,35 +246,34 @@ const Schedule: React.FC = () => {
                         <div className="w-0.5 h-full bg-amber-300/30 absolute top-4"></div>
                       </div>
                       
-                      {/* Time display */}
-                      <div className="text-white/90 font-medium mb-2">
+                      {/* Time display - made more prominent */}
+                      <div className="text-white/90 font-bold text-lg mb-2">
                         {event.startTime}{event.endTime ? ` - ${event.endTime}` : ''}
                       </div>
                       
                       {/* Event card */}
-                      <div className={`bg-gradient-to-r ${getGradient('Friday')} rounded-xl p-4 shadow-lg hover:shadow-amber-300/20 transition-shadow duration-300`}>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="text-lg font-bold text-white">{event.title}</h3>
-                            {event.subtitle && (
-                              <p className="text-white/80 text-sm">{event.subtitle}</p>
-                            )}
-                          </div>
-                          <div className="text-white/80">
-                            <FaChevronRight />
-                          </div>
+                      <div className={`bg-gradient-to-r ${getGradient('Friday')} rounded-xl p-5 shadow-lg hover:shadow-amber-300/20 transition-shadow duration-300 ${
+                        event.isHighlighted ? 'ring-2 ring-white' : ''
+                      }`}>
+                        <div>
+                          <h3 className={`text-xl font-bold text-white ${event.isHighlighted ? 'tracking-wide text-center' : ''}`}>
+                            {event.title}
+                          </h3>
+                          {event.subtitle && (
+                            <p className="text-white/90 text-base mt-1">{event.subtitle}</p>
+                          )}
                         </div>
                         
                         {event.location && (
-                          <div className="mt-3 flex items-center text-white/80 text-sm">
-                            <FaMapMarkerAlt className="mr-1" />
+                          <div className="mt-4 flex items-center text-white/90 text-base">
+                            <FaMapMarkerAlt className="mr-2" />
                             <span>{event.location}</span>
                           </div>
                         )}
                         
                         {event.presenter && (
-                          <div className="mt-1 flex items-center text-white/80 text-sm">
-                            <FaUser className="mr-1" />
+                          <div className="mt-2 flex items-center text-white/90 text-base">
+                            <FaUser className="mr-2" />
                             <span>{event.presenter}</span>
                           </div>
                         )}
@@ -284,7 +286,7 @@ const Schedule: React.FC = () => {
 
             {(selectedDay === 'All' || selectedDay === 'Saturday') && saturdayEvents.length > 0 && (
               <div className="space-y-6">
-                <h2 className="text-2xl md:text-3xl text-amber-300 font-medium text-center mb-4 font-tangled">
+                <h2 className="text-2xl md:text-4xl text-amber-300 font-medium text-center mb-6 font-tangled">
                   Saturday, April 26, 2025
                 </h2>
                 <div className="relative pl-8 border-l-2 border-purple-300/30">
@@ -296,35 +298,34 @@ const Schedule: React.FC = () => {
                         <div className="w-0.5 h-full bg-purple-300/30 absolute top-4"></div>
                       </div>
                       
-                      {/* Time display */}
-                      <div className="text-white/90 font-medium mb-2">
+                      {/* Time display - made more prominent */}
+                      <div className="text-white/90 font-bold text-lg mb-2">
                         {event.startTime}{event.endTime ? ` - ${event.endTime}` : ''}
                       </div>
                       
                       {/* Event card */}
-                      <div className={`bg-gradient-to-r ${getGradient('Saturday')} rounded-xl p-4 shadow-lg hover:shadow-purple-300/20 transition-shadow duration-300`}>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="text-lg font-bold text-white">{event.title}</h3>
-                            {event.subtitle && (
-                              <p className="text-white/80 text-sm">{event.subtitle}</p>
-                            )}
-                          </div>
-                          <div className="text-white/80">
-                            <FaChevronRight />
-                          </div>
+                      <div className={`bg-gradient-to-r ${getGradient('Saturday')} rounded-xl p-5 shadow-lg hover:shadow-purple-300/20 transition-shadow duration-300 ${
+                        event.isHighlighted ? 'ring-2 ring-white' : ''
+                      }`}>
+                        <div>
+                          <h3 className={`text-xl font-bold text-white ${event.isHighlighted ? 'tracking-wide text-center' : ''}`}>
+                            {event.title}
+                          </h3>
+                          {event.subtitle && (
+                            <p className="text-white/90 text-base mt-1">{event.subtitle}</p>
+                          )}
                         </div>
                         
                         {event.location && (
-                          <div className="mt-3 flex items-center text-white/80 text-sm">
-                            <FaMapMarkerAlt className="mr-1" />
+                          <div className="mt-4 flex items-center text-white/90 text-base">
+                            <FaMapMarkerAlt className="mr-2" />
                             <span>{event.location}</span>
                           </div>
                         )}
                         
                         {event.presenter && (
-                          <div className="mt-1 flex items-center text-white/80 text-sm">
-                            <FaUser className="mr-1" />
+                          <div className="mt-2 flex items-center text-white/90 text-base">
+                            <FaUser className="mr-2" />
                             <span>{event.presenter}</span>
                           </div>
                         )}
@@ -337,47 +338,46 @@ const Schedule: React.FC = () => {
 
             {(selectedDay === 'All' || selectedDay === 'Sunday') && sundayEvents.length > 0 && (
               <div className="space-y-6">
-                <h2 className="text-2xl md:text-3xl text-amber-300 font-medium text-center mb-4 font-tangled">
+                <h2 className="text-2xl md:text-4xl text-amber-300 font-medium text-center mb-6 font-tangled">
                   Sunday, April 27, 2025
                 </h2>
-                <div className="relative pl-8 border-l-2 border-blue-300/30">
+                <div className="relative pl-8 border-l-2 border-emerald-300/30">
                   {sundayEvents.map((event) => (
                     <div key={event.id} className="mb-8 relative">
-                      {/* Time indicator */}
+                      {/* Time indicator - updated color to match green theme */}
                       <div className="absolute -left-8 flex flex-col items-center">
-                        <div className="w-4 h-4 bg-blue-400 rounded-full"></div>
-                        <div className="w-0.5 h-full bg-blue-300/30 absolute top-4"></div>
+                        <div className="w-4 h-4 bg-emerald-400 rounded-full"></div>
+                        <div className="w-0.5 h-full bg-emerald-300/30 absolute top-4"></div>
                       </div>
                       
-                      {/* Time display */}
-                      <div className="text-white/90 font-medium mb-2">
+                      {/* Time display - made more prominent */}
+                      <div className="text-white/90 font-bold text-lg mb-2">
                         {event.startTime}{event.endTime ? ` - ${event.endTime}` : ''}
                       </div>
                       
-                      {/* Event card */}
-                      <div className={`bg-gradient-to-r ${getGradient('Sunday')} rounded-xl p-4 shadow-lg hover:shadow-blue-300/20 transition-shadow duration-300`}>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="text-lg font-bold text-white">{event.title}</h3>
-                            {event.subtitle && (
-                              <p className="text-white/80 text-sm">{event.subtitle}</p>
-                            )}
-                          </div>
-                          <div className="text-white/80">
-                            <FaChevronRight />
-                          </div>
+                      {/* Event card - updated shadow color to match green theme */}
+                      <div className={`bg-gradient-to-r ${getGradient('Sunday')} rounded-xl p-5 shadow-lg hover:shadow-emerald-300/20 transition-shadow duration-300 ${
+                        event.isHighlighted ? 'ring-2 ring-white' : ''
+                      }`}>
+                        <div>
+                          <h3 className={`text-xl font-bold text-white ${event.isHighlighted ? 'tracking-wide text-center' : ''}`}>
+                            {event.title}
+                          </h3>
+                          {event.subtitle && (
+                            <p className="text-white/90 text-base mt-1">{event.subtitle}</p>
+                          )}
                         </div>
                         
                         {event.location && (
-                          <div className="mt-3 flex items-center text-white/80 text-sm">
-                            <FaMapMarkerAlt className="mr-1" />
+                          <div className="mt-4 flex items-center text-white/90 text-base">
+                            <FaMapMarkerAlt className="mr-2" />
                             <span>{event.location}</span>
                           </div>
                         )}
                         
                         {event.presenter && (
-                          <div className="mt-1 flex items-center text-white/80 text-sm">
-                            <FaUser className="mr-1" />
+                          <div className="mt-2 flex items-center text-white/90 text-base">
+                            <FaUser className="mr-2" />
                             <span>{event.presenter}</span>
                           </div>
                         )}
@@ -388,12 +388,23 @@ const Schedule: React.FC = () => {
                 
                 {/* End of convention message */}
                 {selectedDay === 'Sunday' || selectedDay === 'All' ? (
-                  <div className="text-center py-4 bg-pink-200/20 backdrop-blur-sm rounded-lg">
-                    <p className="text-lg font-medium text-white">SAFE TRAVELS HOME!</p>
+                  <div className="text-center py-6 bg-pink-200/20 backdrop-blur-sm rounded-lg">
+                    <p className="text-xl font-medium text-white">SAFE TRAVELS HOME!</p>
                   </div>
                 ) : null}
               </div>
             )}
+          </div>
+          
+          {/* Back to top button */}
+          <div className="text-center mt-16">
+            <button 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="inline-flex items-center px-5 py-2 bg-purple-700/50 hover:bg-purple-700/70 text-white rounded-full shadow-md transform transition-all duration-300 hover:scale-105"
+            >
+              <FaArrowUp className="mr-2" />
+              Back to Top
+            </button>
           </div>
         </div>
       </div>

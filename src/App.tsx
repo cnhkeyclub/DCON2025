@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import HouseOfDelegates from './pages/HouseOfDelegates';
 import Map from './pages/Map';
 import Schedule from './pages/Schedule';
+import Gallery from './pages/Gallery';
+import FAQ from './pages/FAQ';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -31,6 +33,16 @@ function App() {
         <Route path="/schedule" element={
           <MainLayout>
             <Schedule />
+          </MainLayout>
+        } />
+        <Route path="/gallery" element={
+          <MainLayout>
+            <Gallery />
+          </MainLayout>
+        } />
+        <Route path="/faq" element={
+          <MainLayout>
+            <FAQ />
           </MainLayout>
         } />
         

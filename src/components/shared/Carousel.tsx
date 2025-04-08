@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, useEffect, ReactNode, useRef, TouchEvent } from 'react';
 import { FaChevronLeft, FaChevronRight, FaCircle } from 'react-icons/fa';
 
 interface CarouselProps {
@@ -19,6 +19,11 @@ const Carousel: React.FC<CarouselProps> = ({
   const [current, setCurrent] = useState(0);
   const childrenArray = React.Children.toArray(children);
   const length = childrenArray.length;
+  
+  // Touch handling state
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const minSwipeDistance = 50; // Minimum distance required for a swipe
 
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1);
@@ -30,6 +35,34 @@ const Carousel: React.FC<CarouselProps> = ({
 
   const goToSlide = (index: number) => {
     setCurrent(index);
+  };
+
+  // Touch event handlers
+  const handleTouchStart = (e: TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const distance = touchStartX.current - touchEndX.current;
+    
+    // Check if the swipe was significant enough
+    if (Math.abs(distance) > minSwipeDistance) {
+      if (distance > 0) {
+        // Swipe left -> go to next slide
+        nextSlide();
+      } else {
+        // Swipe right -> go to previous slide
+        prevSlide();
+      }
+    }
+    
+    // Reset values
+    touchStartX.current = 0;
+    touchEndX.current = 0;
   };
 
   useEffect(() => {
@@ -50,6 +83,9 @@ const Carousel: React.FC<CarouselProps> = ({
       <div 
         className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${current * 100}%)` }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         {childrenArray.map((child, index) => (
           <div key={index} className="min-w-full flex-shrink-0">
