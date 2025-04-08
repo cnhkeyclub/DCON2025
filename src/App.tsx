@@ -6,6 +6,8 @@ import Map from './pages/Map';
 import Schedule from './pages/Schedule';
 import Gallery from './pages/Gallery';
 import FAQ from './pages/FAQ';
+import ScavengerHunt from './pages/ScavengerHunt';
+import Contests from './pages/Contests';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -43,6 +45,16 @@ function App() {
         <Route path="/faq" element={
           <MainLayout>
             <FAQ />
+          </MainLayout>
+        } />
+        <Route path="/scavenger-hunt" element={
+          <MainLayout>
+            <ScavengerHunt />
+          </MainLayout>
+        } />
+        <Route path="/contests" element={
+          <MainLayout>
+            <Contests />
           </MainLayout>
         } />
         

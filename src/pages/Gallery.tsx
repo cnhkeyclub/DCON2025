@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { FaCamera, FaSearch, FaArrowUp } from 'react-icons/fa';
+import { FaCamera, FaSearch, FaArrowUp, FaCalendarDay } from 'react-icons/fa';
 import Lanterns from '../components/home/Lanterns';
+import Carousel from '../components/shared/Carousel';
 
 interface GalleryImage {
   id: string;
   src: string;
   alt: string;
   category: string;
-  year: string;
+  day: 'Friday' | 'Saturday' | 'Sunday';
 }
 
 const Gallery: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [activeYear, setActiveYear] = useState<string | null>(null);
+  const [activeDay, setActiveDay] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
   // CSS for text effects
@@ -25,96 +26,94 @@ const Gallery: React.FC = () => {
 
   // Gallery data
   const galleryImages: GalleryImage[] = [
-    // Leadership images
+    // Friday images
     {
-      id: "img1",
-      src: "/images/gallery/leadership_1.jpg",
-      alt: "District Governor's Address at DCON 2024",
+      id: "fri-1",
+      src: "/images/gallery/friday_1.jpg",
+      alt: "Candidate Meet & Greet",
       category: "leadership",
-      year: "2024"
+      day: "Friday"
     },
     {
-      id: "img2",
-      src: "/images/gallery/leadership_2.jpg",
-      alt: "Board Installation Ceremony",
-      category: "leadership",
-      year: "2024"
+      id: "fri-2",
+      src: "/images/gallery/friday_2.jpg",
+      alt: "Opening Ceremony",
+      category: "social",
+      day: "Friday"
     },
     {
-      id: "img3",
-      src: "/images/gallery/leadership_3.jpg",
-      alt: "International Trustee Speech",
+      id: "fri-3",
+      src: "/images/gallery/friday_3.jpg",
+      alt: "First General Session Keynote",
       category: "leadership",
-      year: "2023"
+      day: "Friday"
+    },
+    {
+      id: "fri-4",
+      src: "/images/gallery/friday_4.jpg",
+      alt: "Region Sessions",
+      category: "workshop",
+      day: "Friday"
     },
     
-    // Service Project images
+    // Saturday images
     {
-      id: "img4",
-      src: "/images/gallery/service_1.jpg",
-      alt: "Hands-On Service Project at DCON",
-      category: "service",
-      year: "2024"
+      id: "sat-1",
+      src: "/images/gallery/saturday_1.jpg",
+      alt: "House of Delegates Voting",
+      category: "leadership",
+      day: "Saturday"
     },
     {
-      id: "img5",
-      src: "/images/gallery/service_2.jpg",
-      alt: "Making Blankets for Children's Hospital",
+      id: "sat-2",
+      src: "/images/gallery/saturday_2.jpg",
+      alt: "Service Project: Making Blankets",
       category: "service",
-      year: "2023"
+      day: "Saturday"
     },
     {
-      id: "img6",
-      src: "/images/gallery/service_3.jpg",
-      alt: "Care Package Assembly Line",
-      category: "service",
-      year: "2022"
+      id: "sat-3",
+      src: "/images/gallery/saturday_3.jpg",
+      alt: "Workshop Sessions",
+      category: "workshop",
+      day: "Saturday"
+    },
+    {
+      id: "sat-4",
+      src: "/images/gallery/saturday_4.jpg",
+      alt: "Recognition Session",
+      category: "social",
+      day: "Saturday"
+    },
+    {
+      id: "sat-5",
+      src: "/images/gallery/saturday_5.jpg",
+      alt: "Governor's Ball",
+      category: "social",
+      day: "Saturday"
     },
     
-    // Workshop images
+    // Sunday images
     {
-      id: "img7",
-      src: "/images/gallery/workshop_1.jpg",
-      alt: "Leadership Development Workshop",
-      category: "workshop",
-      year: "2024"
-    },
-    {
-      id: "img8",
-      src: "/images/gallery/workshop_2.jpg",
-      alt: "Public Speaking Skills Session",
-      category: "workshop",
-      year: "2023"
-    },
-    {
-      id: "img9",
-      src: "/images/gallery/workshop_3.jpg",
-      alt: "Fundraising Strategies Workshop",
-      category: "workshop",
-      year: "2022"
-    },
-    
-    // Social images
-    {
-      id: "img10",
-      src: "/images/gallery/social_1.jpg",
-      alt: "Governor's Ball Dance",
+      id: "sun-1",
+      src: "/images/gallery/sunday_1.jpg",
+      alt: "Farewell Breakfast",
       category: "social",
-      year: "2024"
+      day: "Sunday"
     },
     {
-      id: "img11",
-      src: "/images/gallery/social_2.jpg",
-      alt: "Spirit Rally Competition",
-      category: "social",
-      year: "2023"
+      id: "sun-2",
+      src: "/images/gallery/sunday_2.jpg",
+      alt: "Board Transition Ceremony",
+      category: "leadership",
+      day: "Sunday"
     },
     {
-      id: "img12",
-      src: "/images/gallery/social_3.jpg",
-      alt: "Recognition Dinner",
-      category: "social",
-      year: "2022"
+      id: "sun-3",
+      src: "/images/gallery/sunday_3.jpg",
+      alt: "Closing Session",
+      category: "leadership",
+      day: "Sunday"
     }
   ];
 
@@ -127,8 +126,22 @@ const Gallery: React.FC = () => {
       'bg-yellow-400', 'bg-indigo-400', 'bg-teal-400',
       'bg-orange-400', 'bg-cyan-400', 'bg-lime-400'
     ];
-    const index = parseInt(id.replace('img', '')) % colors.length;
+    const index = parseInt(id.split('-')[1]) % colors.length;
     return colors[index];
+  };
+
+  // Get day color
+  const getDayColor = (day: string) => {
+    switch(day) {
+      case 'Friday':
+        return 'from-amber-400 to-amber-600';
+      case 'Saturday':
+        return 'from-purple-400 to-purple-600';
+      case 'Sunday':
+        return 'from-emerald-500 to-emerald-700';
+      default:
+        return 'from-gray-400 to-gray-600';
+    }
   };
 
   // Categories for filtering
@@ -139,15 +152,20 @@ const Gallery: React.FC = () => {
     { id: 'social', name: 'Social Events' }
   ];
 
-  // Years for filtering
-  const years = ['2024', '2023', '2022'];
+  // Days for filtering
+  const days = ['Friday', 'Saturday', 'Sunday'];
 
   // Filter images based on active filters
   const filteredImages = galleryImages.filter(img => {
     if (activeCategory && img.category !== activeCategory) return false;
-    if (activeYear && img.year !== activeYear) return false;
+    if (activeDay && img.day !== activeDay) return false;
     return true;
   });
+
+  // Group filtered images by day
+  const fridayImages = filteredImages.filter(img => img.day === 'Friday');
+  const saturdayImages = filteredImages.filter(img => img.day === 'Saturday');
+  const sundayImages = filteredImages.filter(img => img.day === 'Sunday');
 
   // Open the image modal
   const openImage = (image: GalleryImage) => {
@@ -160,6 +178,26 @@ const Gallery: React.FC = () => {
     setSelectedImage(null);
     document.body.style.overflow = ''; // Restore scrolling
   };
+
+  // Render an image card for the carousel
+  const renderImageCard = (image: GalleryImage) => (
+    <div 
+      key={image.id} 
+      className="group h-full overflow-hidden rounded-lg border border-amber-300/20 shadow-lg cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl mx-2"
+      onClick={() => openImage(image)}
+    >
+      {/* Placeholder instead of actual image for this demo */}
+      <div className={`w-full h-64 ${getPlaceholderColor(image.id)} relative overflow-hidden`}>
+        <div className="absolute inset-0 flex items-center justify-center opacity-20">
+          <FaCamera className="text-white text-5xl" />
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+          <div className="text-white text-sm font-medium">{image.day}</div>
+          <div className="text-white font-medium line-clamp-2">{image.alt}</div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#241435] via-[#30194a] to-[#3d2160]">
@@ -266,83 +304,97 @@ const Gallery: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           {/* Filter Controls */}
           <div className="mb-12">
-            {/* Category Filters */}
-            <div className="flex flex-wrap justify-center gap-3 mb-4">
-              <button
-                onClick={() => setActiveCategory(null)}
-                className={`py-2 px-6 rounded-full font-medium transition-all duration-300 ${
-                  activeCategory === null 
-                    ? 'bg-amber-300 text-purple-900 shadow-lg' 
-                    : 'bg-[#2c1b48] text-white/80 hover:bg-[#3c2a58] hover:text-white'
-                }`}
-              >
-                All Categories
-              </button>
-              
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setActiveCategory(category.id)}
-                  className={`py-2 px-6 rounded-full font-medium transition-all duration-300 ${
-                    activeCategory === category.id 
-                      ? 'bg-amber-300 text-purple-900 shadow-lg' 
-                      : 'bg-[#2c1b48] text-white/80 hover:bg-[#3c2a58] hover:text-white'
-                  }`}
-                >
-                  {category.name}
-                </button>
-              ))}
-            </div>
-            
-            {/* Year Filters */}
+            {/* Day Filters */}
             <div className="flex flex-wrap justify-center gap-3">
               <button
-                onClick={() => setActiveYear(null)}
-                className={`py-2 px-6 rounded-full font-medium transition-all duration-300 ${
-                  activeYear === null 
+                onClick={() => setActiveDay(null)}
+                className={`py-2 px-8 rounded-full font-medium transition-all duration-300 ${
+                  activeDay === null 
                     ? 'bg-amber-300 text-purple-900 shadow-lg' 
                     : 'bg-[#2c1b48] text-white/80 hover:bg-[#3c2a58] hover:text-white'
                 }`}
               >
-                All Years
+                All Days
               </button>
               
-              {years.map((year) => (
+              {days.map((day) => (
                 <button
-                  key={year}
-                  onClick={() => setActiveYear(year)}
-                  className={`py-2 px-6 rounded-full font-medium transition-all duration-300 ${
-                    activeYear === year 
+                  key={day}
+                  onClick={() => setActiveDay(day)}
+                  className={`py-2 px-8 rounded-full font-medium transition-all duration-300 ${
+                    activeDay === day 
                       ? 'bg-amber-300 text-purple-900 shadow-lg' 
                       : 'bg-[#2c1b48] text-white/80 hover:bg-[#3c2a58] hover:text-white'
                   }`}
                 >
-                  {year}
+                  {day}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filteredImages.map((image) => (
-              <div 
-                key={image.id} 
-                className="group overflow-hidden rounded-lg border border-amber-300/20 shadow-lg cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
-                onClick={() => openImage(image)}
-              >
-                {/* Placeholder instead of actual image for this demo */}
-                <div className={`w-full h-64 ${getPlaceholderColor(image.id)} relative overflow-hidden`}>
-                  <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                    <FaCamera className="text-white text-5xl" />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                    <div className="text-white text-sm">{image.year}</div>
-                    <div className="text-white font-medium line-clamp-2">{image.alt}</div>
-                  </div>
+          {/* Carousels by Day */}
+          <div className="space-y-16">
+            {/* Only show sections for the days that have images after filtering */}
+            {(activeDay === null || activeDay === 'Friday') && fridayImages.length > 0 && (
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3 mb-2">
+                  <div className={`h-6 w-6 rounded-full bg-gradient-to-r ${getDayColor('Friday')}`}></div>
+                  <h2 className="text-2xl md:text-3xl text-amber-300 font-medium font-tangled">
+                    Friday, April 25, 2025
+                  </h2>
+                </div>
+                <div className="bg-black/20 backdrop-blur-sm rounded-xl p-6">
+                  <Carousel autoSlide={false} className="h-64">
+                    {fridayImages.length === 0 ? (
+                      [<div key="empty-friday" className="flex items-center justify-center h-full">
+                        <p className="text-white/70">No photos available for Friday</p>
+                      </div>]
+                    ) : fridayImages.map(image => renderImageCard(image))}
+                  </Carousel>
                 </div>
               </div>
-            ))}
+            )}
+
+            {(activeDay === null || activeDay === 'Saturday') && saturdayImages.length > 0 && (
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3 mb-2">
+                  <div className={`h-6 w-6 rounded-full bg-gradient-to-r ${getDayColor('Saturday')}`}></div>
+                  <h2 className="text-2xl md:text-3xl text-amber-300 font-medium font-tangled">
+                    Saturday, April 26, 2025
+                  </h2>
+                </div>
+                <div className="bg-black/20 backdrop-blur-sm rounded-xl p-6">
+                  <Carousel autoSlide={false} className="h-64">
+                    {saturdayImages.length === 0 ? (
+                      [<div key="empty-saturday" className="flex items-center justify-center h-full">
+                        <p className="text-white/70">No photos available for Saturday</p>
+                      </div>]
+                    ) : saturdayImages.map(image => renderImageCard(image))}
+                  </Carousel>
+                </div>
+              </div>
+            )}
+
+            {(activeDay === null || activeDay === 'Sunday') && sundayImages.length > 0 && (
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3 mb-2">
+                  <div className={`h-6 w-6 rounded-full bg-gradient-to-r ${getDayColor('Sunday')}`}></div>
+                  <h2 className="text-2xl md:text-3xl text-amber-300 font-medium font-tangled">
+                    Sunday, April 27, 2025
+                  </h2>
+                </div>
+                <div className="bg-black/20 backdrop-blur-sm rounded-xl p-6">
+                  <Carousel autoSlide={false} className="h-64">
+                    {sundayImages.length === 0 ? (
+                      [<div key="empty-sunday" className="flex items-center justify-center h-full">
+                        <p className="text-white/70">No photos available for Sunday</p>
+                      </div>]
+                    ) : sundayImages.map(image => renderImageCard(image))}
+                  </Carousel>
+                </div>
+              </div>
+            )}
           </div>
           
           {/* Empty State */}
@@ -387,7 +439,7 @@ const Gallery: React.FC = () => {
             <div className="p-6">
               <h3 className="text-white text-xl font-medium mb-2">{selectedImage.alt}</h3>
               <div className="flex items-center justify-between text-white/70">
-                <div>DCON {selectedImage.year}</div>
+                <div>{selectedImage.day}, April {selectedImage.day === 'Friday' ? '25' : selectedImage.day === 'Saturday' ? '26' : '27'}, 2025</div>
                 <div className="capitalize">{selectedImage.category}</div>
               </div>
             </div>

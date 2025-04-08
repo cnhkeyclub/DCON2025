@@ -46,7 +46,8 @@ const Navbar: React.FC = () => {
     { name: 'Schedule', path: '/schedule' },
     { name: 'Map', path: '/map' },
     { name: 'Workshops', path: '#workshops' },
-    { name: 'Contests', path: '#contests' },
+    { name: 'Contests', path: '/contests' },
+    { name: 'Scavenger Hunt', path: '/scavenger-hunt' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'FAQ', path: '/faq' },
   ];

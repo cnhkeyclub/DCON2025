@@ -50,22 +50,26 @@ const GovernorMessage: React.FC = () => {
                 <div className="relative z-10">
                   <div className="bg-tangled-purple/10 border-l-4 border-tangled-purple p-4 md:p-6 rounded-r-md">
                     <p className="text-sm md:text-base mb-3 md:mb-5 text-white">
-                      Fellow Key Clubbers of the California-Nevada-Hawai'i District, it is with great honor and excitement that I welcome you to our 2025 District Convention, "Tangled in Service." This year's theme reminds us that though our individual service projects may seem small, together they create an illuminating impact on our communities.
+                      Buzz Buzz CNH!
+                      We are super excited to announce our 79th annual District Convention in 2025, themed "Tangled In Service!" 
+                      This is an amazing opportunity for you to meet Key Clubber from all across California, Nevada, and Hawai'i! Our convention boasts engaging workshops, Tangled-themed art rooms, informational expos, and more!
                     </p>
                     
                     <p className="text-sm md:text-base mb-3 md:mb-5 text-white">
-                      Every Key Clubber's contribution makes a difference. As we gather together, I encourage each of you to take this opportunity to learn, grow, and strengthen your commitment to service and leadership. Your dedication to serving your communities is what makes our organization extraordinary.
+                      District Convention is a time of celebration where members gather to commemorate the accomplishments of the term. This year's Convention will take place from Friday, April 25th, to Sunday, April 27th. 
+                      On the first day of convention, join us as we kick off the event with educational sessions, and a keynote speaker! On the second day, vote in elections as we choose the District leaders who will serve us during the next term, participate as we host hands-on service activities and interactive expos, then recognize our outstanding officers and clubs with us during the Recognition Session, and finally dance the night away at the Governor's Ball!
                     </p>
                     
                     <p className="text-sm md:text-base text-white">
-                      I challenge each of you to approach this convention with an open heart and mind. Meet new friends, share your stories, and take what you learn back to your home clubs. Together we'll continue to light up our communities with service!
+                      We have so much in store for you at our Convention this year, and we can't wait for you to experience it all! It will be an unforgettable weekend where you are sure to make lifelong memories!
+                      Ready to get Tangled up in this Convention with us? We hope to see you there!
                     </p>
                   </div>
                   
                   <div className="flex justify-end mt-6 md:mt-8">
                     <div className="text-right">
-                      <p className="font-tangled text-xl md:text-2xl text-tangled-purple mb-1">Governor's Name</p>
-                      <p className="text-xs md:text-sm text-tangled-green">CNH District Governor 2024-25</p>
+                      <p className="font-tangled text-xl md:text-2xl text-tangled-gold mb-1">Austin Alves</p>
+                      <p className="text-xs md:text-sm text-tangled-green">CNH District Governor 2024-2025</p>
                     </div>
                   </div>
                 </div>
@@ -79,10 +83,12 @@ const GovernorMessage: React.FC = () => {
               <div className="relative">
                 <div className="absolute -inset-3 bg-tangled-gold/30 rounded-full blur-xl z-0"></div>
                 <div className="w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-tangled-purple shadow-xl relative z-10">
-                  {/* Placeholder image - replace with actual image */}
-                  <div className="w-full h-full bg-gradient-to-br from-tangled-gold/30 to-tangled-purple/20 flex items-center justify-center">
-                    <span className="text-tangled-purple font-medium">Governor's Photo</span>
-                  </div>
+                  {/* Updated with actual governor image */}
+                  <img 
+                    src="/images/governors/austin-alves.png" 
+                    alt="Austin Alves - District Governor" 
+                    className="w-full h-full object-cover object-center"
+                  />
                 </div>
                 <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 bg-tangled-gold text-white text-sm py-2 px-6 rounded-full shadow-lg whitespace-nowrap z-20">
                   District Governor

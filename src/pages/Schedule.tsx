@@ -13,6 +13,7 @@ interface ScheduleItem {
   location: string;
   presenter?: string;
   isHighlighted?: boolean;
+  isAnnouncement?: boolean;
 }
 
 const Schedule: React.FC = () => {
@@ -33,7 +34,8 @@ const Schedule: React.FC = () => {
 
   // Schedule data from the table
   const scheduleData: ScheduleItem[] = [
-    // Friday events
+    // Friday events - DINNER ON OWN moved to the top, with isAnnouncement flag
+    { id: 'fri-dinner', day: 'Friday', startTime: '', endTime: '', title: 'DINNER ON OWN', location: '', isHighlighted: true, isAnnouncement: true },
     { id: 'fri-1', day: 'Friday', startTime: '2:30pm', endTime: '4:30pm', title: 'Candidate Meet & Greet', location: 'Room 202A/B' },
     { id: 'fri-2', day: 'Friday', startTime: '2:30pm', endTime: '6:00pm', title: 'Member Recognition Registration', location: 'Room 103 (MR Room)' },
     { id: 'fri-3', day: 'Friday', startTime: '2:30pm', endTime: '7:00pm', title: 'SAA Registration', location: 'Exhibit Hall Pre-Function' },
@@ -47,7 +49,6 @@ const Schedule: React.FC = () => {
     { id: 'fri-11', day: 'Friday', startTime: '5:30pm', endTime: '6:10pm', title: 'Education Session 1', subtitle: '(40 min session)', location: 'Various Rooms' },
     { id: 'fri-12', day: 'Friday', startTime: '6:00pm', endTime: '7:00pm', title: 'Scrapbook Judging', location: 'Room 103 (MR Room)' },
     { id: 'fri-13', day: 'Friday', startTime: '6:20pm', endTime: '7:00pm', title: 'Education Session 2', subtitle: '(40 min session)', location: 'Various Rooms' },
-    { id: 'fri-dinner', day: 'Friday', startTime: '7:00pm', endTime: '8:30pm', title: 'DINNER ON OWN', location: '', isHighlighted: true },
     { id: 'fri-14', day: 'Friday', startTime: '7:10pm', endTime: '8:15pm', title: 'Advisor/Chaperone Security Briefing', subtitle: '(Mandatory)', location: 'Ballroom C' },
     { id: 'fri-15', day: 'Friday', startTime: '7:10pm', endTime: '8:15pm', title: 'Region Sessions', location: 'Various Rooms' },
     { id: 'fri-16', day: 'Friday', startTime: '8:30pm', endTime: '10:30pm', title: 'First General Session', subtitle: '(Keynote)', location: 'Exhibit Hall A' },
@@ -102,11 +103,18 @@ const Schedule: React.FC = () => {
       case 'Saturday':
         return 'from-purple-400 to-purple-600';
       case 'Sunday':
-        return 'from-emerald-400 to-emerald-600';
+        return 'from-emerald-500 to-emerald-700';
       default:
         return 'from-gray-400 to-gray-600';
     }
   };
+
+  // Helper to render an announcement box (for special events like "DINNER ON OWN" and "SAFE TRAVELS HOME")
+  const renderAnnouncementBox = (text: string) => (
+    <div className="text-center py-6 bg-pink-200/20 backdrop-blur-sm rounded-lg mb-8">
+      <p className="text-xl font-medium text-white">{text}</p>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#241435] via-[#30194a] to-[#3d2160]">
@@ -211,7 +219,7 @@ const Schedule: React.FC = () => {
       {/* Schedule Content Section */}
       <div className="relative pt-8 pb-20 px-4 md:px-8">
         {/* Reduced max-width to make layout smaller on web view */}
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           {/* Filter Buttons */}
           <div className="flex flex-wrap justify-center gap-3 mb-8">
             {['All', 'Friday', 'Saturday', 'Sunday'].map((day) => (
@@ -239,46 +247,55 @@ const Schedule: React.FC = () => {
                 </h2>
                 <div className="relative pl-8 border-l-2 border-amber-300/30">
                   {fridayEvents.map((event) => (
-                    <div key={event.id} className="mb-8 relative">
-                      {/* Time indicator */}
-                      <div className="absolute -left-8 flex flex-col items-center">
-                        <div className="w-4 h-4 bg-amber-300 rounded-full"></div>
-                        <div className="w-0.5 h-full bg-amber-300/30 absolute top-4"></div>
-                      </div>
-                      
-                      {/* Time display - made more prominent */}
-                      <div className="text-white/90 font-bold text-lg mb-2">
-                        {event.startTime}{event.endTime ? ` - ${event.endTime}` : ''}
-                      </div>
-                      
-                      {/* Event card */}
-                      <div className={`bg-gradient-to-r ${getGradient('Friday')} rounded-xl p-5 shadow-lg hover:shadow-amber-300/20 transition-shadow duration-300 ${
-                        event.isHighlighted ? 'ring-2 ring-white' : ''
-                      }`}>
-                        <div>
-                          <h3 className={`text-xl font-bold text-white ${event.isHighlighted ? 'tracking-wide text-center' : ''}`}>
-                            {event.title}
-                          </h3>
-                          {event.subtitle && (
-                            <p className="text-white/90 text-base mt-1">{event.subtitle}</p>
-                          )}
+                    <React.Fragment key={event.id}>
+                      {/* Show announcements in special style */}
+                      {event.isAnnouncement ? (
+                        renderAnnouncementBox(event.title)
+                      ) : (
+                        <div className="mb-8 relative">
+                          {/* Time indicator */}
+                          <div className="absolute -left-8 flex flex-col items-center">
+                            <div className="w-4 h-4 bg-amber-300 rounded-full"></div>
+                            <div className="w-0.5 h-full bg-amber-300/30 absolute top-4"></div>
+                          </div>
+                          
+                          {/* Time display - made more prominent */}
+                          <div className="text-white/90 font-bold text-lg mb-2">
+                            {event.startTime}{event.endTime ? ` - ${event.endTime}` : ''}
+                          </div>
+                          
+                          {/* Event card */}
+                          <div className={`bg-gradient-to-r ${getGradient('Friday')} rounded-xl p-5 shadow-lg hover:shadow-amber-300/20 transition-shadow duration-300 ${
+                            event.isHighlighted ? 'ring-2 ring-white' : ''
+                          }`}>
+                            <div>
+                              <h3 className={`text-xl font-bold text-white ${event.isHighlighted ? 'tracking-wide text-center' : ''}`}>
+                                {event.title}
+                              </h3>
+                              {event.subtitle && (
+                                <p className="text-white/90 text-base mt-1">{event.subtitle}</p>
+                              )}
+                            </div>
+                            
+                            {event.location && (
+                              <div className="mt-4">
+                                <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/30 text-white font-medium text-base shadow-sm">
+                                  <FaMapMarkerAlt className="mr-2 text-yellow-300 animate-pulse text-lg" />
+                                  <span>{event.location}</span>
+                                </div>
+                              </div>
+                            )}
+                            
+                            {event.presenter && (
+                              <div className="mt-3 flex items-center text-white/90 text-base">
+                                <FaUser className="mr-2" />
+                                <span>{event.presenter}</span>
+                              </div>
+                            )}
+                          </div>
                         </div>
-                        
-                        {event.location && (
-                          <div className="mt-4 flex items-center text-white/90 text-base">
-                            <FaMapMarkerAlt className="mr-2" />
-                            <span>{event.location}</span>
-                          </div>
-                        )}
-                        
-                        {event.presenter && (
-                          <div className="mt-2 flex items-center text-white/90 text-base">
-                            <FaUser className="mr-2" />
-                            <span>{event.presenter}</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                      )}
+                    </React.Fragment>
                   ))}
                 </div>
               </div>
@@ -317,14 +334,16 @@ const Schedule: React.FC = () => {
                         </div>
                         
                         {event.location && (
-                          <div className="mt-4 flex items-center text-white/90 text-base">
-                            <FaMapMarkerAlt className="mr-2" />
-                            <span>{event.location}</span>
+                          <div className="mt-4">
+                            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/30 text-white font-medium text-base shadow-sm">
+                              <FaMapMarkerAlt className="mr-2 text-fuchsia-300 animate-pulse text-lg" />
+                              <span>{event.location}</span>
+                            </div>
                           </div>
                         )}
                         
                         {event.presenter && (
-                          <div className="mt-2 flex items-center text-white/90 text-base">
+                          <div className="mt-3 flex items-center text-white/90 text-base">
                             <FaUser className="mr-2" />
                             <span>{event.presenter}</span>
                           </div>
@@ -341,13 +360,13 @@ const Schedule: React.FC = () => {
                 <h2 className="text-2xl md:text-4xl text-amber-300 font-medium text-center mb-6 font-tangled">
                   Sunday, April 27, 2025
                 </h2>
-                <div className="relative pl-8 border-l-2 border-emerald-300/30">
+                <div className="relative pl-8 border-l-2 border-emerald-500/30">
                   {sundayEvents.map((event) => (
                     <div key={event.id} className="mb-8 relative">
                       {/* Time indicator - updated color to match green theme */}
                       <div className="absolute -left-8 flex flex-col items-center">
-                        <div className="w-4 h-4 bg-emerald-400 rounded-full"></div>
-                        <div className="w-0.5 h-full bg-emerald-300/30 absolute top-4"></div>
+                        <div className="w-4 h-4 bg-emerald-500 rounded-full"></div>
+                        <div className="w-0.5 h-full bg-emerald-500/30 absolute top-4"></div>
                       </div>
                       
                       {/* Time display - made more prominent */}
@@ -356,7 +375,7 @@ const Schedule: React.FC = () => {
                       </div>
                       
                       {/* Event card - updated shadow color to match green theme */}
-                      <div className={`bg-gradient-to-r ${getGradient('Sunday')} rounded-xl p-5 shadow-lg hover:shadow-emerald-300/20 transition-shadow duration-300 ${
+                      <div className={`bg-gradient-to-r ${getGradient('Sunday')} rounded-xl p-5 shadow-lg hover:shadow-emerald-500/20 transition-shadow duration-300 ${
                         event.isHighlighted ? 'ring-2 ring-white' : ''
                       }`}>
                         <div>
@@ -369,14 +388,16 @@ const Schedule: React.FC = () => {
                         </div>
                         
                         {event.location && (
-                          <div className="mt-4 flex items-center text-white/90 text-base">
-                            <FaMapMarkerAlt className="mr-2" />
-                            <span>{event.location}</span>
+                          <div className="mt-4">
+                            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/30 text-white font-medium text-base shadow-sm">
+                              <FaMapMarkerAlt className="mr-2 text-green-300 animate-pulse text-lg" />
+                              <span>{event.location}</span>
+                            </div>
                           </div>
                         )}
                         
                         {event.presenter && (
-                          <div className="mt-2 flex items-center text-white/90 text-base">
+                          <div className="mt-3 flex items-center text-white/90 text-base">
                             <FaUser className="mr-2" />
                             <span>{event.presenter}</span>
                           </div>
@@ -388,9 +409,7 @@ const Schedule: React.FC = () => {
                 
                 {/* End of convention message */}
                 {selectedDay === 'Sunday' || selectedDay === 'All' ? (
-                  <div className="text-center py-6 bg-pink-200/20 backdrop-blur-sm rounded-lg">
-                    <p className="text-xl font-medium text-white">SAFE TRAVELS HOME!</p>
-                  </div>
+                  renderAnnouncementBox("SAFE TRAVELS HOME!")
                 ) : null}
               </div>
             )}
