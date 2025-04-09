@@ -158,12 +158,6 @@ const Workshops: React.FC = () => {
     return filtered;
   };
 
-  // Get room name by ID
-  const getRoomName = (roomId: string): string => {
-    const room = rooms.find(r => r.id === roomId);
-    return room ? room.name : "Unknown Room";
-  };
-
   // Get session details by ID
   const getSessionDetails = (sessionId: number): Session | undefined => {
     return sessions.find(s => s.id === sessionId);
