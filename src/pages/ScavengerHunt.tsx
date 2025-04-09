@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaMapMarkedAlt, FaCheckSquare, FaCamera, FaStar, FaUsers, FaArrowUp, FaInstagram, FaHeart, FaHashtag, FaHandshake, FaMusic, FaVideo, FaCheck } from 'react-icons/fa';
 import { GiPartyPopper, GiDuck } from 'react-icons/gi';
 import Lanterns from '../components/home/Lanterns';
+import PageNatureDecorations from '../components/decorations/PageNatureDecorations';
 
 const ScavengerHunt: React.FC = () => {
   // State to track completed challenges
@@ -54,7 +55,7 @@ const ScavengerHunt: React.FC = () => {
     { id: 7, task: "Dance to/sing a song from tangled with your roomies", icon: <FaMusic className="text-indigo-400" /> },
     { id: 8, task: "Video cheering at a general session", icon: <FaVideo className="text-red-400" /> },
     { id: 9, task: "Picture with your club", icon: <FaUsers className="text-teal-400" /> },
-    { id: 10, task: "Picture of you and someone with a matching ribbon", icon: <FaStar className="text-amber-400" /> },
+    { id: 10, task: "Picture of you and someone with the same division colors", icon: <FaStar className="text-amber-400" /> },
     { id: 11, task: "Picture with a workshop presenter", icon: <FaUsers className="text-cyan-400" /> },
     { id: 12, task: "Division sign with someone from another division", icon: <FaCheckSquare className="text-emerald-400" /> },
     { id: 13, task: "Picture in the art room", icon: <FaCamera className="text-orange-400" /> },
@@ -63,6 +64,9 @@ const ScavengerHunt: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#241435] via-[#30194a] to-[#3d2160]">
+      {/* Add nature decorations */}
+      <PageNatureDecorations theme="gold" density="medium" />
+      
       {/* Inject keyframes */}
       <style dangerouslySetInnerHTML={{ __html: keyframesStyles }} />
       
@@ -184,7 +188,7 @@ const ScavengerHunt: React.FC = () => {
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <FaCheckSquare className="text-amber-300 mt-1 mr-2 flex-shrink-0" />
-                    <span>Click on the challenge number to mark it as completed</span>
+                    <span>Click on the challenge number to track your progress</span>
                   </li>
                   <li className="flex items-start">
                     <FaCheckSquare className="text-amber-300 mt-1 mr-2 flex-shrink-0" />
@@ -303,18 +307,17 @@ const ScavengerHunt: React.FC = () => {
             <p className="text-center text-white/80">Use these tags in your stories and posts to be featured on our official DCON pages!</p>
           </div>
           
-          {/* Back to top button */}
-          <div className="text-center">
-            <button 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center px-5 py-2 bg-purple-700/50 hover:bg-purple-700/70 text-white rounded-full shadow-md transform transition-all duration-300 hover:scale-105"
-            >
-              <FaArrowUp className="mr-2" />
-              Back to Top
-            </button>
-          </div>
         </div>
       </div>
+
+      {/* Scroll to top button */}
+      <button 
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="fixed bottom-6 right-6 bg-amber-500/80 hover:bg-amber-500 text-white p-3 rounded-full shadow-lg transition-all z-50"
+        aria-label="Scroll to top"
+      >
+        <FaArrowUp />
+      </button>
     </div>
   );
 };

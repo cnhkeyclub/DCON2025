@@ -24,9 +24,12 @@ const PositionSection: React.FC<PositionSectionProps> = ({
   className = '',
   description
 }) => {
-  // Determine if this is the Trustee section
-  const isTrusteeSection = title === 'Trustee';
+  // Determine if this is the Trustee section or International Endorsement section
+  const isTrusteeSection = title === 'Trustee' || title === 'International Endorsement';
 
+  // Check if the title is "International Endorsement" - we'll remove "District" only for this title
+  const displayTitle = title;
+  
   return (
     <section className={`py-10 relative overflow-hidden ${className}`}>
       {/* Background decorative elements */}
@@ -62,10 +65,10 @@ const PositionSection: React.FC<PositionSectionProps> = ({
           </div>
           
           <div className={`inline-block ${positionColor} text-white px-6 py-2 rounded-full mb-3 shadow-md transform hover:scale-105 transition-all duration-300`}>
-            <h2 className="text-xl font-medium">District {title}</h2>
+            <h2 className="text-xl font-medium">{displayTitle}</h2>
           </div>
           <div className="w-32 h-1 bg-gradient-to-r from-transparent via-amber-300 to-transparent mx-auto mb-3"></div>
-          <p className="text-gray-200/70 max-w-xl mx-auto text-sm">Meet the candidates for District {title}</p>
+          <p className="text-gray-200/70 max-w-xl mx-auto text-sm">Meet the candidates for {displayTitle}</p>
         </div>
         
         {/* Position Description */}

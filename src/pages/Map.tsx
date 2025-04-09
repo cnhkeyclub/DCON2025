@@ -3,6 +3,7 @@ import { FaMapMarkedAlt, FaDownload } from 'react-icons/fa';
 import Lanterns from '../components/home/Lanterns';
 import mapLevel1 from '../assets/images/MAP_LEVEL1.png';
 import mapLevel2 from '../assets/images/MAP_LEVEL2.png';
+import PageNatureDecorations from '../components/decorations/PageNatureDecorations';
 
 const Map: React.FC = () => {
   // CSS for text effects
@@ -15,6 +16,9 @@ const Map: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#241435] via-[#30194a] to-[#3d2160]">
+      {/* Add nature decorations */}
+      <PageNatureDecorations theme="green" density="light" />
+      
       {/* Inject keyframes */}
       <style dangerouslySetInnerHTML={{ __html: keyframesStyles }} />
       

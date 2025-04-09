@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaCamera, FaSearch, FaArrowUp } from 'react-icons/fa';
 import Lanterns from '../components/home/Lanterns';
 import Carousel from '../components/shared/Carousel';
+import PageNatureDecorations from '../components/decorations/PageNatureDecorations';
 
 interface GalleryImage {
   id: string;
@@ -16,6 +17,24 @@ const Gallery: React.FC = () => {
   const [activeCategory, _setActiveCategory] = useState<string | null>(null);
   const [activeDay, setActiveDay] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  
+  // State for scroll to top button
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  // Monitor scrolling to show/hide the scroll button
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollButton(window.scrollY > 300);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // CSS for text effects
   const keyframesStyles = `
@@ -31,29 +50,25 @@ const Gallery: React.FC = () => {
     {
       id: "fri-1",
       src: "/images/gallery/friday_1.jpg",
-      alt: "Candidate Meet & Greet",
-      category: "leadership",
+      
       day: "Friday"
     },
     {
       id: "fri-2",
       src: "/images/gallery/friday_2.jpg",
-      alt: "Opening Ceremony",
-      category: "social",
+   
       day: "Friday"
     },
     {
       id: "fri-3",
       src: "/images/gallery/friday_3.jpg",
-      alt: "First General Session Keynote",
-      category: "leadership",
+      
       day: "Friday"
     },
     {
       id: "fri-4",
       src: "/images/gallery/friday_4.jpg",
-      alt: "Region Sessions",
-      category: "workshop",
+  
       day: "Friday"
     },
     
@@ -61,36 +76,31 @@ const Gallery: React.FC = () => {
     {
       id: "sat-1",
       src: "/images/gallery/saturday_1.jpg",
-      alt: "House of Delegates Voting",
-      category: "leadership",
+ 
       day: "Saturday"
     },
     {
       id: "sat-2",
       src: "/images/gallery/saturday_2.jpg",
-      alt: "Service Project: Making Blankets",
-      category: "service",
+     
       day: "Saturday"
     },
     {
       id: "sat-3",
       src: "/images/gallery/saturday_3.jpg",
-      alt: "Workshop Sessions",
-      category: "workshop",
+     
       day: "Saturday"
     },
     {
       id: "sat-4",
       src: "/images/gallery/saturday_4.jpg",
-      alt: "Recognition Session",
-      category: "social",
+   
       day: "Saturday"
     },
     {
       id: "sat-5",
       src: "/images/gallery/saturday_5.jpg",
-      alt: "Governor's Ball",
-      category: "social",
+    
       day: "Saturday"
     },
     
@@ -98,22 +108,19 @@ const Gallery: React.FC = () => {
     {
       id: "sun-1",
       src: "/images/gallery/sunday_1.jpg",
-      alt: "Farewell Breakfast",
-      category: "social",
+     
       day: "Sunday"
     },
     {
       id: "sun-2",
       src: "/images/gallery/sunday_2.jpg",
-      alt: "Board Transition Ceremony",
-      category: "leadership",
+     
       day: "Sunday"
     },
     {
       id: "sun-3",
       src: "/images/gallery/sunday_3.jpg",
-      alt: "Closing Session",
-      category: "leadership",
+    
       day: "Sunday"
     }
   ];
@@ -186,7 +193,6 @@ const Gallery: React.FC = () => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
           <div className="text-white text-sm font-medium">{image.day}</div>
-          <div className="text-white font-medium line-clamp-2">{image.alt}</div>
         </div>
       </div>
     </div>
@@ -194,6 +200,9 @@ const Gallery: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#241435] via-[#30194a] to-[#3d2160]">
+      {/* Add nature decorations */}
+      <PageNatureDecorations theme="gold" density="dense" />
+      
       {/* Inject keyframes */}
       <style dangerouslySetInnerHTML={{ __html: keyframesStyles }} />
       
@@ -398,17 +407,6 @@ const Gallery: React.FC = () => {
               <p className="text-white/60">Try adjusting your filters to see more results</p>
             </div>
           )}
-          
-          {/* Back to top button */}
-          <div className="text-center mt-16">
-            <button 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center px-5 py-2 bg-purple-700/50 hover:bg-purple-700/70 text-white rounded-full shadow-md transform transition-all duration-300 hover:scale-105"
-            >
-              <FaArrowUp className="mr-2" />
-              Back to Top
-            </button>
-          </div>
         </div>
       </div>
       
@@ -438,6 +436,17 @@ const Gallery: React.FC = () => {
             </div>
           </div>
         </div>
+      )}
+      
+      {/* Circular scroll to top button */}
+      {showScrollButton && (
+        <button 
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 bg-amber-500/80 hover:bg-amber-500 text-white p-3 rounded-full shadow-lg transition-all z-50"
+          aria-label="Scroll to top"
+        >
+          <FaArrowUp />
+        </button>
       )}
     </div>
   );

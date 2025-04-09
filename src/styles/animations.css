@@ -1,0 +1,32 @@
+/* Existing animations */
+// ... existing code ...
+
+/* Flower sway animation */
+@keyframes flower-sway {
+  0%, 100% {
+    transform: rotate(var(--angle)) translateY(0);
+  }
+  50% {
+    transform: rotate(calc(var(--angle) + 5deg)) translateY(-2px);
+  }
+}
+
+/* Petal glow animation */
+@keyframes petal-glow {
+  0%, 100% {
+    filter: brightness(1) drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+  }
+  50% {
+    filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+  }
+}
+
+/* Floating animation for flowers */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+} 

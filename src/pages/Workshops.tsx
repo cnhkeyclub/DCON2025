@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaGraduationCap, FaMapMarkerAlt, FaClock, FaChalkboardTeacher, FaArrowUp } from 'react-icons/fa';
 import Lanterns from '../components/home/Lanterns';
+import PageNatureDecorations from '../components/decorations/PageNatureDecorations';
 
 // Define interfaces for our data structure
 interface Session {
@@ -184,6 +185,9 @@ const Workshops: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#241435] via-[#30194a] to-[#3d2160]">
+      {/* Add nature decorations */}
+      <PageNatureDecorations theme="purple" density="dense" />
+      
       {/* Inject keyframes */}
       <style dangerouslySetInnerHTML={{ __html: keyframesStyles }} />
       

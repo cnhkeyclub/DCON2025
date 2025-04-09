@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PositionSection from '../components/delegates/PositionSection';
 import Lanterns from '../components/home/Lanterns';
 import { FaSun, FaDownload, FaFileAlt, FaBook, FaArrowUp } from 'react-icons/fa';
+import PageNatureDecorations from '../components/decorations/PageNatureDecorations';
 
 // We can use public paths for images instead of imports to fix build errors
 const HouseOfDelegates: React.FC = () => {
+  // State for scroll to top button
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  // Monitor scrolling to show/hide the scroll button
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollButton(window.scrollY > 300);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Candidate data
   const governorCandidates = [
     {
@@ -73,7 +92,7 @@ const HouseOfDelegates: React.FC = () => {
     Governor: "The District Governor leads the California-Nevada-Hawai'i District, ensuring effective communication, planning, and support for board members and clubs. They guide the implementation of initiatives, maintain strong connections with Key Club International, represent our district at major events, and promote the values of Key Club to members of CNH.",
     Secretary: "The District Secretary keeps the district running smoothly by managing official records, meeting minutes, and service hour tracking. They support club secretaries, oversee the Monthly Report Form, and help board members stay organized and informed through clear, consistent communication.",
     Treasurer: "The District Treasurer ensures the district stays financially sound by managing dues, budgeting, and fundraising efforts. They guide club treasurers, educate board members on financial processes, and promote creative ways to support district initiatives.",
-    Trustee: "The International Trustee serves as a liaison between our district and Key Club International, representing the interests of CNH on the international level and bringing global initiatives back to our district."
+    "International Endorsement": "The International Trustee serves as a liaison between our district and Key Club International, representing the interests of CNH on the international level and bringing global initiatives back to our district."
   };
 
   // CSS for text effects
@@ -86,6 +105,9 @@ const HouseOfDelegates: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#241435] via-[#30194a] to-[#3d2160]">
+      {/* Add nature decorations */}
+      <PageNatureDecorations theme="purple" density="medium" />
+      
       {/* Inject keyframes */}
       <style dangerouslySetInnerHTML={{ __html: keyframesStyles }} />
       
@@ -227,13 +249,13 @@ const HouseOfDelegates: React.FC = () => {
           description={positionDescriptions.Treasurer}
         />
         
-        {/* Trustee Section */}
+        {/* Trustee Section - Change to International Endorsement */}
         <PositionSection 
-          title="Trustee" 
+          title="International Endorsement" 
           candidates={trusteeCandidates} 
           positionColor="bg-tangled-lavender"
           className="mb-8"
-          description={positionDescriptions.Trustee}
+          description={positionDescriptions["International Endorsement"]}
         />
         
         {/* PDF Preview Section */}
@@ -248,32 +270,30 @@ const HouseOfDelegates: React.FC = () => {
             </p>
           </div>
           
-        {/* PDF Embed */}
-<div className="w-full flex justify-center shadow-2xl border border-amber-300/20 rounded-xl overflow-hidden mb-8">
-  <div className="w-full max-w-[850px] h-[580px] sm:h-[950px]">
-    <iframe 
-      src="https://drive.google.com/file/d/1-a95-bMrYFfqYxNuJEFNDKtMIltayl7j/preview" 
-      className="w-full h-full border-0"
-      title="Candidates Booklet"
-      allow="autoplay"
-    ></iframe>
-  </div>
-</div>
-
-
-          
-          {/* Back to top button */}
-          <div className="text-center pb-8">
-            <button 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center px-5 py-2 bg-purple-700/50 hover:bg-purple-700/70 text-white rounded-full shadow-md transform transition-all duration-300 hover:scale-105"
-            >
-              <FaArrowUp className="mr-2" />
-              Back to Top
-            </button>
+          {/* PDF Embed */}
+          <div className="w-full flex justify-center shadow-2xl border border-amber-300/20 rounded-xl overflow-hidden mb-8">
+            <div className="w-full max-w-[850px] h-[580px] sm:h-[950px]">
+              <iframe 
+                src="https://drive.google.com/file/d/1-a95-bMrYFfqYxNuJEFNDKtMIltayl7j/preview" 
+                className="w-full h-full border-0"
+                title="Candidates Booklet"
+                allow="autoplay"
+              ></iframe>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Scroll to top button */}
+      {showScrollButton && (
+        <button 
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 bg-amber-500/80 hover:bg-amber-500 text-white p-3 rounded-full shadow-lg transition-all z-50"
+          aria-label="Scroll to top"
+        >
+          <FaArrowUp />
+        </button>
+      )}
     </div>
   );
 };

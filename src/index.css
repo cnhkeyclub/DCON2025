@@ -201,6 +201,14 @@ section {
       background-position: 200% center;
     }
   }
+
+  /* Forest theme elements */
+  .forest-card {
+    @apply relative overflow-hidden backdrop-blur-sm rounded-lg transition-all duration-300;
+    background: linear-gradient(to bottom, rgba(26, 135, 84, 0.1), rgba(10, 30, 15, 0.3));
+    border: 1px solid rgba(91, 140, 90, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
 }
 
 /* Scrollbar styles for webkit browsers */
@@ -238,4 +246,111 @@ section {
   .text-shadow-none {
     text-shadow: none;
   }
+}
+
+/* Animations for nature elements */
+@keyframes flower-sway {
+  0%, 100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  25% {
+    transform: rotate(3deg) translateX(1px);
+  }
+  75% {
+    transform: rotate(-3deg) translateX(-1px);
+  }
+}
+
+@keyframes leaf-rustle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(2deg) scale(1.02);
+  }
+}
+
+@keyframes vine-grow {
+  from {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+}
+
+/* Nature themed utility classes */
+.nature-card {
+  @apply relative overflow-hidden rounded-lg border-2 border-green-600 bg-gradient-to-b from-green-50 to-green-100;
+  box-shadow: 0 4px 15px rgba(45, 106, 79, 0.25);
+}
+
+.nature-card:hover {
+  background: linear-gradient(to bottom, rgba(26, 135, 84, 0.1), rgba(30, 16, 47, 0.7));
+  border: 1px solid rgba(91, 140, 90, 0.25);
+  transform: translateY(-2px);
+}
+
+.tangled-green-accent {
+  @apply absolute -z-10 text-green-600/20 transform;
+}
+
+.tangled-green-accent::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(to right, transparent, #1A8754, transparent);
+  transform-origin: center;
+  transform: scaleX(0.6);
+  opacity: 0.6;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.tangled-green-accent:hover::before {
+  transform: scaleX(1);
+  opacity: 0.8;
+}
+
+.leafy-list {
+  @apply pl-6 space-y-3;
+  list-style: none;
+}
+
+.leafy-list li {
+  @apply relative pl-6 mb-2;
+}
+
+.leafy-list li:before {
+  content: '🍃';
+  @apply absolute left-0 text-green-600 animate-[leaf-rustle_3s_ease-in-out_infinite];
+}
+
+.green-glow-hover {
+  transition: all 0.3s ease;
+}
+
+.green-glow-hover:hover {
+  filter: drop-shadow(0 0 8px rgba(26, 135, 84, 0.7));
+}
+
+/* Section styles with nature elements */
+.nature-section {
+  @apply relative overflow-hidden py-12;
+  background: linear-gradient(135deg, rgba(91, 140, 90, 0.05) 0%, rgba(30, 16, 47, 0.8) 100%);
+}
+
+.nature-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(to right, transparent, rgba(26, 135, 84, 0.7), transparent);
+  opacity: 0.7;
 }

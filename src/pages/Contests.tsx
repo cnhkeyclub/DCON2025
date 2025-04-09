@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaTrophy, FaAward, FaStar, FaTicketAlt, FaUserTie, FaRegClock, FaMapMarkerAlt, FaArrowUp } from 'react-icons/fa';
 import Lanterns from '../components/home/Lanterns';
+import PageNatureDecorations from '../components/decorations/PageNatureDecorations';
 
 const Contests: React.FC = () => {
+  // State for scroll to top button
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  // Monitor scrolling to show/hide the scroll button
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollButton(window.scrollY > 300);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // CSS for text effects
   const keyframesStyles = `
     @keyframes subtle-pulse {
@@ -17,6 +36,9 @@ const Contests: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#241435] via-[#30194a] to-[#3d2160]">
+      {/* Add nature decorations */}
+      <PageNatureDecorations theme="purple" density="medium" />
+      
       {/* Inject keyframes */}
       <style dangerouslySetInnerHTML={{ __html: keyframesStyles }} />
       
@@ -249,19 +271,19 @@ const Contests: React.FC = () => {
               </div>
             </div>
           </div>
-          
-          {/* Back to top button */}
-          <div className="text-center">
-            <button 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center px-5 py-2 bg-purple-700/50 hover:bg-purple-700/70 text-white rounded-full shadow-md transform transition-all duration-300 hover:scale-105"
-            >
-              <FaArrowUp className="mr-2" />
-              Back to Top
-            </button>
-          </div>
         </div>
       </div>
+
+      {/* Scroll to top button */}
+      {showScrollButton && (
+        <button 
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 bg-amber-500/80 hover:bg-amber-500 text-white p-3 rounded-full shadow-lg transition-all z-50"
+          aria-label="Scroll to top"
+        >
+          <FaArrowUp />
+        </button>
+      )}
     </div>
   );
 };
