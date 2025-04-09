@@ -50,25 +50,29 @@ const Gallery: React.FC = () => {
     {
       id: "fri-1",
       src: "/images/gallery/friday_1.jpg",
-      
+      alt: "Candidate Meet & Greet",
+      category: "leadership",
       day: "Friday"
     },
     {
       id: "fri-2",
       src: "/images/gallery/friday_2.jpg",
-   
+      alt: "Opening Ceremony",
+      category: "social",
       day: "Friday"
     },
     {
       id: "fri-3",
       src: "/images/gallery/friday_3.jpg",
-      
+      alt: "First General Session Keynote",
+      category: "leadership",
       day: "Friday"
     },
     {
       id: "fri-4",
       src: "/images/gallery/friday_4.jpg",
-  
+      alt: "Region Sessions",
+      category: "workshop",
       day: "Friday"
     },
     
@@ -76,31 +80,36 @@ const Gallery: React.FC = () => {
     {
       id: "sat-1",
       src: "/images/gallery/saturday_1.jpg",
- 
+      alt: "House of Delegates Voting",
+      category: "leadership",
       day: "Saturday"
     },
     {
       id: "sat-2",
       src: "/images/gallery/saturday_2.jpg",
-     
+      alt: "Service Project: Making Blankets",
+      category: "service",
       day: "Saturday"
     },
     {
       id: "sat-3",
       src: "/images/gallery/saturday_3.jpg",
-     
+      alt: "Workshop Sessions",
+      category: "workshop",
       day: "Saturday"
     },
     {
       id: "sat-4",
       src: "/images/gallery/saturday_4.jpg",
-   
+      alt: "Recognition Session",
+      category: "social",
       day: "Saturday"
     },
     {
       id: "sat-5",
       src: "/images/gallery/saturday_5.jpg",
-    
+      alt: "Governor's Ball",
+      category: "social",
       day: "Saturday"
     },
     
@@ -108,19 +117,22 @@ const Gallery: React.FC = () => {
     {
       id: "sun-1",
       src: "/images/gallery/sunday_1.jpg",
-     
+      alt: "Farewell Breakfast",
+      category: "social",
       day: "Sunday"
     },
     {
       id: "sun-2",
       src: "/images/gallery/sunday_2.jpg",
-     
+      alt: "Board Transition Ceremony",
+      category: "leadership",
       day: "Sunday"
     },
     {
       id: "sun-3",
       src: "/images/gallery/sunday_3.jpg",
-    
+      alt: "Closing Session",
+      category: "leadership",
       day: "Sunday"
     }
   ];
