@@ -103,7 +103,7 @@ const Schedule: React.FC = () => {
       case 'Saturday':
         return 'from-purple-400 to-purple-600';
       case 'Sunday':
-        return 'from-emerald-500 to-emerald-700';
+        return 'from-green-400 to-green-600';
       default:
         return 'from-gray-400 to-gray-600';
     }
@@ -219,7 +219,7 @@ const Schedule: React.FC = () => {
       {/* Schedule Content Section */}
       <div className="relative pt-8 pb-20 px-4 md:px-8">
         {/* Reduced max-width to make layout smaller on web view */}
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           {/* Filter Buttons */}
           <div className="flex flex-wrap justify-center gap-3 mb-8">
             {['All', 'Friday', 'Saturday', 'Sunday'].map((day) => (
@@ -360,13 +360,13 @@ const Schedule: React.FC = () => {
                 <h2 className="text-2xl md:text-4xl text-amber-300 font-medium text-center mb-6 font-tangled">
                   Sunday, April 27, 2025
                 </h2>
-                <div className="relative pl-8 border-l-2 border-emerald-500/30">
+                <div className="relative pl-8 border-l-2 border-green-500/30">
                   {sundayEvents.map((event) => (
                     <div key={event.id} className="mb-8 relative">
                       {/* Time indicator - updated color to match green theme */}
                       <div className="absolute -left-8 flex flex-col items-center">
-                        <div className="w-4 h-4 bg-emerald-500 rounded-full"></div>
-                        <div className="w-0.5 h-full bg-emerald-500/30 absolute top-4"></div>
+                        <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+                        <div className="w-0.5 h-full bg-green-500/30 absolute top-4"></div>
                       </div>
                       
                       {/* Time display - made more prominent */}
@@ -375,7 +375,7 @@ const Schedule: React.FC = () => {
                       </div>
                       
                       {/* Event card - updated shadow color to match green theme */}
-                      <div className={`bg-gradient-to-r ${getGradient('Sunday')} rounded-xl p-5 shadow-lg hover:shadow-emerald-500/20 transition-shadow duration-300 ${
+                      <div className={`bg-gradient-to-r ${getGradient('Sunday')} rounded-xl p-5 shadow-lg hover:shadow-green-500/20 transition-shadow duration-300 ${
                         event.isHighlighted ? 'ring-2 ring-white' : ''
                       }`}>
                         <div>

@@ -8,6 +8,7 @@ import Gallery from './pages/Gallery';
 import FAQ from './pages/FAQ';
 import ScavengerHunt from './pages/ScavengerHunt';
 import Contests from './pages/Contests';
+import Workshops from './pages/Workshops';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -35,6 +36,11 @@ function App() {
         <Route path="/schedule" element={
           <MainLayout>
             <Schedule />
+          </MainLayout>
+        } />
+        <Route path="/workshops" element={
+          <MainLayout>
+            <Workshops />
           </MainLayout>
         } />
         <Route path="/gallery" element={
