@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "prebuild": "ls -la && find src -type d | sort",
+    "build": "tsc -b --verbose && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
