@@ -3,6 +3,7 @@ import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import HouseOfDelegates from './pages/HouseOfDelegates';
 import Map from './pages/Map';
+import Seating from './pages/Seating';
 import Schedule from './pages/Schedule';
 import Gallery from './pages/Gallery';
 import FAQ from './pages/FAQ';
@@ -31,6 +32,11 @@ function App() {
         <Route path="/map" element={
           <MainLayout>
             <Map />
+          </MainLayout>
+        } />
+        <Route path="/seating" element={
+          <MainLayout>
+            <Seating />
           </MainLayout>
         } />
         <Route path="/schedule" element={
