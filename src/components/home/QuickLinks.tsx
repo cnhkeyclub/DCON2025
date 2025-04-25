@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   FaCalendarAlt, 
   FaCamera, 
@@ -14,8 +15,8 @@ const QuickLinkCard: React.FC<{
   linkUrl: string;
 }> = ({ icon, title, linkUrl }) => {
   return (
-    <a 
-      href={linkUrl}
+    <Link 
+      to={linkUrl}
       className="flex flex-col items-center justify-center w-[45%] sm:w-auto mb-8 sm:mb-0 group"
     >
       <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-2xl bg-gradient-to-br from-purple-900/40 to-violet-800/60 shadow-lg border-2 border-tangled-gold/70 hover:transform hover:scale-110 transition-all duration-300 mb-2 outline outline-1 outline-white/40 group-hover:outline-tangled-gold/60 overflow-hidden">
@@ -29,7 +30,7 @@ const QuickLinkCard: React.FC<{
         <div className="relative z-10 text-amber-300 text-2xl md:text-3xl drop-shadow-[0_2px_4px_rgba(251,191,36,0.7)]">{icon}</div>
       </div>
       <h3 className="font-tangled text-xs md:text-sm text-white text-center mt-2 group-hover:text-tangled-gold transition-colors duration-300">{title}</h3>
-    </a>
+    </Link>
   );
 };
 
@@ -43,7 +44,7 @@ const QuickLinks: React.FC = () => {
     {
       icon: <FaUserTie />,
       title: 'House of Delegates',
-      linkUrl: '/delegates'
+      linkUrl: '/house-of-delegates'
     },
     {
       icon: <FaChalkboardTeacher />,
