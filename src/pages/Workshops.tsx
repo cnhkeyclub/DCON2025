@@ -61,7 +61,7 @@ const Workshops: React.FC = () => {
     }
   `;
 
-  // Session data
+  // Session data (Matched from CNH DCON 2025 Matrix image)
   const sessions: Session[] = [
     { id: 1, name: "Session 1", time: "5:30 pm - 6:10 pm", day: "Friday", duration: "40 min" },
     { id: 2, name: "Session 2", time: "6:20 pm - 7:00 pm", day: "Friday", duration: "40 min" },
@@ -73,7 +73,7 @@ const Workshops: React.FC = () => {
     { id: 8, name: "Session 8", time: "3:45 pm - 4:45 pm", day: "Saturday", duration: "60 min" },
   ];
 
-  // Room data
+  // Room data (Matched from CNH DCON 2025 Matrix image)
   const rooms: Room[] = [
     { id: "ballroomA", name: "Ballroom A", capacity: 272 },
     { id: "ballroomB", name: "Ballroom B", capacity: 272 },
@@ -81,37 +81,35 @@ const Workshops: React.FC = () => {
     { id: "room104", name: "Room 104 A/B", capacity: 162 },
     { id: "room200", name: "Room 200 A/B/C", capacity: 132 },
     { id: "room203", name: "Room 203 A/B/C", capacity: 154 },
-    { id: "room204", name: "Room 204", capacity: 98 },
+    { id: "room107", name: "Room 107 A/B/C", capacity: 102 },
     { id: "room100", name: "Room 100 A/B", capacity: 90 },
   ];
 
-  // Workshop data (populated based on the tabular data provided)
+  // Workshop data (Updated based on CNH DCON 2025 Matrix image)
   const workshops: Workshop[] = [
     // Ballroom A workshops
-    { id: "ba-s1", title: "Keshi 101", presenters: "Devin Le, Lukas Minkevich, Kyle Nguyen", roomId: "ballroomA", sessionId: 1 },
-    { id: "ba-s2", title: "Key-nnecting", presenters: "Alina Giang, Jay Giang, Alen Moshkan", roomId: "ballroomA", sessionId: 2 },
-    { id: "ba-s3", title: "The Ultimate Key Club Memes, Games and Icebreakers", presenters: "Martmariam Mikhail, Raymond Yan", roomId: "ballroomA", sessionId: 3 },
+    { id: "ba-s1", title: "Key-nnecting with the BEES", presenters: "Alina Giang, Jay Giang, Alen Moshkan", roomId: "ballroomA", sessionId: 1 },
+    { id: "ba-s2", title: "How to Grow Club Membership to 200+ Dues-Paid Members", presenters: "Emily Lin, Aye Kyaw, Elizabeth Nguyen", roomId: "ballroomA", sessionId: 2 },
+    { id: "ba-s3", title: "Key Advisor 201: Navigating Advisor Stress, Burn Out and Resiliency", presenters: "Kathy Kendrick", roomId: "ballroomA", sessionId: 3 },
     { id: "ba-s4", title: "How to be an Academic Weapon Using Time Management", presenters: "Martmariam Mikhail", roomId: "ballroomA", sessionId: 4 },
-    { id: "ba-s5", title: "How to End the Global Water Crisis with Thirst Project", presenters: "Andrew Reese", roomId: "ballroomA", sessionId: 5 },
-    { id: "ba-s6", title: "How to Boss Up Your Social Game", presenters: "Chelsie Baham", roomId: "ballroomA", sessionId: 6 },
-    { id: "ba-s8", title: "EXPO SECTIONS", presenters: "", roomId: "ballroomA", sessionId: 8 },
+    { id: "ba-s6", title: "Friendly Rizz", presenters: "Nadine Aquino, Abril Lizarraga", roomId: "ballroomA", sessionId: 6 },
     
     // Ballroom B workshops
     { id: "bb-s1", title: "International Updates", presenters: "Ariana Lee", roomId: "ballroomB", sessionId: 1 },
-    { id: "bb-s2", title: "Clawing Your Way to Service", presenters: "Jackie Wei, Natalie Do, Rico Tan Chen, Joey Choi", roomId: "ballroomB", sessionId: 2 },
+    { id: "bb-s2", title: "Growing Your Way to Service", presenters: "Jackie Wei, Natalie Do, Rico Tan Chen, Joey Choi", roomId: "ballroomB", sessionId: 2 },
     { id: "bb-s3", title: "Helping Advisors to Understand the MRF", presenters: "Charlene Masuhara, Marshall Roberson", roomId: "ballroomB", sessionId: 3 },
     { id: "bb-s4", title: "Key Advisor 101", presenters: "Elsie Nash", roomId: "ballroomB", sessionId: 4 },
     { id: "bb-s5", title: "Money Matters", presenters: "Elsie Nash", roomId: "ballroomB", sessionId: 5 },
     { id: "bb-s6", title: "Youth Protection Guidelines", presenters: "Lon Salgren", roomId: "ballroomB", sessionId: 6 },
     { id: "bb-s7", title: "Meet the CNH Key Club Kiwanis Leadership Team", presenters: "CNH Key Club Kiwanis Leadership Team", roomId: "ballroomB", sessionId: 7 },
-    { id: "bb-s8", title: "EXPO SECTIONS", presenters: "", roomId: "ballroomB", sessionId: 8 },
     
     // Ballroom C workshops
-    { id: "bc-s1", title: "Unicef Workshop: U (Yes, YOU) Can Change the World", presenters: "Shamak Gowda", roomId: "ballroomC", sessionId: 1 },
-    { id: "bc-s2", title: "How to be GOATED!", presenters: "Sienna Villalobos, Joannah Silvestre", roomId: "ballroomC", sessionId: 2 },
-    { id: "bc-s3", title: "Key Advisor 201: Navigating Advisor Stress, Burn Out and Resiliency", presenters: "Kathy Kendrick", roomId: "ballroomC", sessionId: 3 },
-    { id: "bc-s4", title: "Making KEY-nnections", presenters: "Nadine Aquino, Abril Lizarraga", roomId: "ballroomC", sessionId: 4 },
-    { id: "bc-s8", title: "EXPO SECTIONS", presenters: "", roomId: "ballroomC", sessionId: 8 },
+    { id: "bc-s1", title: "U(NICEF) Can Change the World", presenters: "Shamak Gowda", roomId: "ballroomC", sessionId: 1 },
+    { id: "bc-s2", title: "How to be GOATED!", presenters: "Sienna Villalobos, Jeannah Silvestre", roomId: "ballroomC", sessionId: 2 },
+    { id: "bc-s3", title: "How to Boss Up Your Social Game", presenters: "Chelsie Baham", roomId: "ballroomC", sessionId: 3 },
+    { id: "bc-s4", title: "Friendly Rizz", presenters: "Nadine Aquino, Abril Lizarraga", roomId: "ballroomC", sessionId: 4 },
+    { id: "bc-s6", title: "College and onto Circle K", presenters: "Dylan Mua, Dylan Nelson", roomId: "ballroomC", sessionId: 6 },
+    { id: "bc-s7", title: "College and onto Circle K", presenters: "Dylan Mua, Dylan Nelson", roomId: "ballroomC", sessionId: 7 },
     
     // Room 104 A/B workshops
     { id: "r104-s1", title: "How to Pivot", presenters: "Sunyodh Sandhu", roomId: "room104", sessionId: 1 },
@@ -121,25 +119,28 @@ const Workshops: React.FC = () => {
     { id: "r104-s8", title: "Presidents & Vice Presidents", presenters: "Austin Alves", roomId: "room104", sessionId: 8 },
     
     // Room 200 A/B/C workshops
-    { id: "r200-s1", title: "How to be Safe-KEY and What to Do in Sticky Situations (Slime-Making)", presenters: "Bryan Nguyen, Sean Patrick Lee, Oralee Tran", roomId: "room200", sessionId: 1 },
-    { id: "r200-s2", title: "Taste the Rainbow!", presenters: "Aliyah Soto, Angel Cui, Bianca Dong, Katelyn Vo", roomId: "room200", sessionId: 2 },
+    { id: "r200-s1", title: "How to be Safe-KEY and What to Do in Sticky Situations", presenters: "(Slime-Making) | Bryan Nguyen, Sean Patrick Lee, Oralee Tran", roomId: "room200", sessionId: 1 },
+    { id: "r200-s2", title: "Taste the Rainbow!", presenters: "Aliyah Soto, Angel Cui, Mee Olivia, Katelyn Vo", roomId: "room200", sessionId: 2 },
     { id: "r200-s3", title: "Editors", presenters: "Isabelle Schinzing, Cassie Nguyen, Nia Danelia, Faith del Rio", roomId: "room200", sessionId: 3 },
     { id: "r200-s4", title: "Graphic Standards", presenters: "Isabelle Schinzing, Cassie Nguyen, Nia Danelia, Faith del Rio", roomId: "room200", sessionId: 4 },
     { id: "r200-s8", title: "Secretaries", presenters: "Tak Nishida", roomId: "room200", sessionId: 8 },
     
     // Room 203 A/B/C workshops
     { id: "r203-s1", title: "Service Projects", presenters: "Alice Sar", roomId: "room203", sessionId: 1 },
-    { id: "r203-s2", title: "Buzzing with a Purpose: How to Lead with Intention", presenters: "Ashley Wang, Alyson Tan", roomId: "room203", sessionId: 2 },
-    { id: "r203-s3", title: "How to Not Crash Out", presenters: "Katie Ha, Andre Nguyen", roomId: "room203", sessionId: 3 },
+    { id: "r203-s2", title: "Buzz with a Purpose", presenters: "Ashley Wang, Alyson Tan", roomId: "room203", sessionId: 2 },
+    { id: "r203-s3", title: "How to be an Academic Weapon Using Time Management", presenters: "Martmariam Mikhail", roomId: "room203", sessionId: 3 },
+    { id: "r203-s4", title: "BEE-ngo", presenters: "Sara Tobias", roomId: "room203", sessionId: 4 },
+    { id: "r203-s5", title: "BEE-ngo", presenters: "Sara Tobias", roomId: "room203", sessionId: 5 },
+    { id: "r203-s6", title: "BEE-ngo", presenters: "Sara Tobias", roomId: "room203", sessionId: 6 },
+    { id: "r203-s7", title: "BEE-ngo", presenters: "Sara Tobias", roomId: "room203", sessionId: 7 },
     { id: "r203-s8", title: "Treasurers", presenters: "Elizabeth Gilmore", roomId: "room203", sessionId: 8 },
     
-    // Room 204 workshops
-    { id: "r204-s1", title: "Serving CNH: A Guide to BEEing a BadBEE", presenters: "Isabella Cardenas, Kaori Delacruz", roomId: "room204", sessionId: 1 },
-    { id: "r204-s2", title: "The BEE-auty of Cybertruck", presenters: "Jacklyn Song, Max Robinson, Vance Grimes", roomId: "room204", sessionId: 2 },
-    { id: "r204-s3", title: "Growing Take-Aways from Key Club", presenters: "Emma Richards", roomId: "room204", sessionId: 3 },
-    { id: "r204-s8", title: "How to Grow Club Memberhip to 200+ Dues-Paid Members", presenters: "Emily Lin, Aye Kyaw, Elizabeth Nguyen", roomId: "room204", sessionId: 8 },
+    // Room 107 A/B/C workshops
+    { id: "r107-s1", title: "Serving CNH: A Guide to BEEing a BadBEE", presenters: "Isabella Cardenas, Kaori Delacruz", roomId: "room107", sessionId: 1 },
+    { id: "r107-s2", title: "The BEE-auty of Cybertruck", presenters: "Jacklyn Song, Max Robinson, Vance Grimes", roomId: "room107", sessionId: 2 },
+    { id: "r107-s8", title: "Keshi 101", presenters: "Devin Le, Lukas Minkevich, Kyle Nguyen", roomId: "room107", sessionId: 8 },
     
-    // Room 100 A/B workshops - UPDATED with only two workshops
+    // Room 100 A/B workshops
     { id: "r100-s1", title: "Presidents Setting Precedents", presenters: "Brad Hager, Claire Liao", roomId: "room100", sessionId: 1 },
     { id: "r100-s2", title: "Overcoming Procrastination", presenters: "Emily Chhuon, Vincent Tiet", roomId: "room100", sessionId: 2 },
   ];
@@ -261,7 +262,7 @@ const Workshops: React.FC = () => {
             WebkitTextFillColor: "transparent",
             filter: "drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3))"
           }}>
-            Find your perfect workshops at DCON 2025
+            Explore the CNH District Convention 2025 workshop schedule
           </p>
         </div>
       </div>
@@ -269,7 +270,7 @@ const Workshops: React.FC = () => {
       {/* Workshop Schedule Content - Desktop Version (hidden on mobile) */}
       <div className="relative py-8 px-4 hidden md:block">
         <div className="max-w-7xl mx-auto bg-[#1F0F33]/60 backdrop-blur-sm border border-amber-400/20 rounded-xl p-6 shadow-lg">
-          <h2 className="text-2xl text-amber-300 font-medium font-tangled mb-6 text-center">Workshop Schedule</h2>
+          <h2 className="text-2xl text-amber-300 font-medium font-tangled mb-6 text-center">CNH DISTRICT CONVENTION 2025 MATRIX</h2>
           
           {/* Workshop Table - Desktop View */}
           <div className="overflow-x-auto">
@@ -283,7 +284,7 @@ const Workshops: React.FC = () => {
                         <span className="text-sm font-bold">{session.name}</span>
                         <span className="text-xs text-amber-200/80">{session.day}</span>
                         <span className="text-xs text-amber-200/80">{session.time}</span>
-                        <span className="text-xs text-purple-300/80">{session.duration}</span>
+                        <span className="text-xs text-purple-300/80">({session.duration})</span>
                       </div>
                     </th>
                   ))}
